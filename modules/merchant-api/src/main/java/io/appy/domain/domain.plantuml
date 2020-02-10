@@ -1,0 +1,548 @@
+@startuml
+
+title __DOMAIN's Class Diagram__\n
+
+  namespace io.appy.domain {
+    class io.appy.domain.Addon {
+        ~ name : String
+        ~ price : int
+        ~ sku : String
+        + Addon()
+        + Addon()
+        + getName()
+        + getPrice()
+        + getSku()
+        + setName()
+        + setPrice()
+        + setSku()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.AddonGroup {
+        ~ addons : List<Addon>
+        ~ isAddonMandatory : Boolean
+        ~ maximimCount : int
+        ~ name : String
+        + AddonGroup()
+        + AddonGroup()
+        + getAddonMandatory()
+        + getAddons()
+        + getMaximimCount()
+        + getName()
+        + setAddonMandatory()
+        + setAddons()
+        + setMaximimCount()
+        + setName()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Address {
+        ~ city : String
+        ~ line1 : String
+        ~ line2 : String
+        ~ street : String
+        ~ zip : String
+        + Address()
+        + Address()
+        + getCity()
+        + getLine1()
+        + getLine2()
+        + getStreet()
+        + getZip()
+        + setCity()
+        + setLine1()
+        + setLine2()
+        + setStreet()
+        + setZip()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Appconfig {
+        ~ backgroundImage : String
+        ~ icon : String
+        ~ logo : String
+        ~ starterScreen : String
+        + Appconfig()
+        + Appconfig()
+        + getBackgroundImage()
+        + getIcon()
+        + getLogo()
+        + getStarterScreen()
+        + setBackgroundImage()
+        + setIcon()
+        + setLogo()
+        + setStarterScreen()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.BusinessDetailResponse {
+        ~ businessId : String
+        ~ country : String
+        ~ email : String
+        ~ name : String
+        ~ password : String
+        ~ phone : String
+        + BusinessDetailResponse()
+        + BusinessDetailResponse()
+        + getBusinessId()
+        + getCountry()
+        + getEmail()
+        + getName()
+        + getPassword()
+        + getPhone()
+        + setBusinessId()
+        + setCountry()
+        + setEmail()
+        + setName()
+        + setPassword()
+        + setPhone()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.BusinessDetails {
+        ~ country : String
+        ~ countryCode : String
+        ~ email : String
+        ~ name : String
+        ~ password : String
+        ~ phone : String
+        + BusinessDetails()
+        + BusinessDetails()
+        + getCountry()
+        + getCountryCode()
+        + getEmail()
+        + getName()
+        + getPassword()
+        + getPhone()
+        + setCountry()
+        + setCountryCode()
+        + setEmail()
+        + setName()
+        + setPassword()
+        + setPhone()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.BusinessDetailsRequest {
+        ~ businessId : String
+        + BusinessDetailsRequest()
+        + BusinessDetailsRequest()
+        + getBusinessId()
+        + setBusinessId()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.BusinessFullDetails {
+        ~ businessId : String
+        ~ country : String
+        ~ currency : String
+        ~ deliveryHours : List<OpenHours>
+        ~ deliveryLocation : List<DeliveryLocation>
+        ~ description : String
+        ~ docType : String
+        ~ email : String
+        ~ name : String
+        ~ paypalSecret : String
+        ~ pickUpHours : List<OpenHours>
+        ~ type : String
+        + BusinessFullDetails()
+        + BusinessFullDetails()
+        + getAddress()
+        + getAppconfig()
+        + getBusinessId()
+        + getContact()
+        + getCountry()
+        + getCurrency()
+        + getDeliveryHours()
+        + getDeliveryLocation()
+        + getDescription()
+        + getDocType()
+        + getEmail()
+        + getName()
+        + getPaypalSecret()
+        + getPickUpHours()
+        + getTheme()
+        + getType()
+        + setAddress()
+        + setAppconfig()
+        + setBusinessId()
+        + setContact()
+        + setCountry()
+        + setCurrency()
+        + setDeliveryHours()
+        + setDeliveryLocation()
+        + setDescription()
+        + setDocType()
+        + setEmail()
+        + setName()
+        + setPaypalSecret()
+        + setPickUpHours()
+        + setTheme()
+        + setType()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.CartAddons {
+        ~ child : String
+        ~ parent : String
+        ~ price : int
+        + CartAddons()
+        + CartAddons()
+        + getChild()
+        + getParent()
+        + getPrice()
+        + setChild()
+        + setParent()
+        + setPrice()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.CartProduct {
+        ~ addons : List<CartAddons>
+        ~ image : String
+        ~ name : String
+        ~ price : int
+        ~ quantity : int
+        ~ variant : String
+        ~ variantPrice : int
+        + CartProduct()
+        + CartProduct()
+        + getAddons()
+        + getImage()
+        + getName()
+        + getPrice()
+        + getQuantity()
+        + getVariant()
+        + getVariantPrice()
+        + setAddons()
+        + setImage()
+        + setName()
+        + setPrice()
+        + setQuantity()
+        + setVariant()
+        + setVariantPrice()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Categories {
+        ~ categories : List<Category>
+        + Categories()
+        + Categories()
+        + getCategories()
+        + setCategories()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Category {
+        ~ categoryId : String
+        ~ docType : String
+        ~ image : String
+        ~ name : String
+        ~ visibility : Boolean
+        + Category()
+        + Category()
+        + getCategoryId()
+        + getImage()
+        + getName()
+        + getVisibility()
+        + setCategoryId()
+        + setImage()
+        + setName()
+        + setVisibility()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Contact {
+        ~ email : String
+        ~ phone : String
+        + Contact()
+        + Contact()
+        + getEmail()
+        + getPhone()
+        + setEmail()
+        + setPhone()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.DeliveryLocation {
+        ~ city : String
+        ~ deliveryTime : String
+        ~ price : int
+        ~ state : String
+        + DeliveryLocation()
+        + DeliveryLocation()
+        + getCity()
+        + getDeliveryTime()
+        + getPrice()
+        + getState()
+        + setCity()
+        + setDeliveryTime()
+        + setPrice()
+        + setState()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.LoginAjaxRes {
+        ~ businessId : String
+        ~ email : String
+        ~ page : String
+        + LoginAjaxRes()
+        + LoginAjaxRes()
+        + getBusinessId()
+        + getEmail()
+        + getPage()
+        + setBusinessId()
+        + setEmail()
+        + setPage()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.LoginDetails {
+        ~ email : String
+        ~ password : String
+        + LoginDetails()
+        + LoginDetails()
+        + getEmail()
+        + getPassword()
+        + setEmail()
+        + setPassword()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.LoginResponse {
+        ~ businessId : String
+        ~ email : String
+        ~ password : String
+        ~ phone : String
+        ~ status : String
+        + LoginResponse()
+        + LoginResponse()
+        + getBusinessId()
+        + getEmail()
+        + getPassword()
+        + getPhone()
+        + getStatus()
+        + setBusinessId()
+        + setEmail()
+        + setPassword()
+        + setPhone()
+        + setStatus()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.OpenHours {
+        ~ dayOfWeek : String
+        ~ from : String
+        ~ to : String
+        + OpenHours()
+        + OpenHours()
+        + getDayOfWeek()
+        + getFrom()
+        + getTo()
+        + setDayOfWeek()
+        + setFrom()
+        + setTo()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.OrderUpdate {
+        ~ orderId : String
+        ~ status : String
+        + OrderUpdate()
+        + OrderUpdate()
+        + getOrderId()
+        + getStatus()
+        + setOrderId()
+        + setStatus()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Product {
+        ~ addons : List<AddonGroup>
+        ~ businessId : String
+        ~ categoryId : List<String>
+        ~ description : String
+        ~ docType : String
+        ~ image : String
+        ~ name : String
+        ~ price : int
+        ~ productId : String
+        ~ visibility : Boolean
+        + Product()
+        + Product()
+        + getAddons()
+        + getBusinessId()
+        + getCategoryId()
+        + getDescription()
+        + getDocType()
+        + getImage()
+        + getName()
+        + getPrice()
+        + getProductId()
+        + getVariant()
+        + getVisibility()
+        + setAddons()
+        + setBusinessId()
+        + setCategoryId()
+        + setDescription()
+        + setDocType()
+        + setImage()
+        + setName()
+        + setPrice()
+        + setProductId()
+        + setVariant()
+        + setVisibility()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Products {
+        ~ products : List<Product>
+        + Products()
+        + Products()
+        + getProducts()
+        + setProducts()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.PurchaseOrders {
+        ~ businessId : String
+        ~ customerEmail : String
+        ~ customerName : String
+        ~ deliveryAddress : String
+        ~ deliveryType : Date
+        ~ notes : String
+        ~ orderReadyBy : Date
+        ~ orderedAt : String
+        ~ platfrom : String
+        ~ products : List<CartProduct>
+        ~ purchaseId : String
+        ~ status : String
+        + PurchaseOrders()
+        + PurchaseOrders()
+        + getBusinessId()
+        + getCustomerEmail()
+        + getCustomerName()
+        + getDeliveryAddress()
+        + getDeliveryType()
+        + getNotes()
+        + getOrderReadyBy()
+        + getOrderedAt()
+        + getPlatfrom()
+        + getProducts()
+        + getPurchaseId()
+        + getStatus()
+        + setBusinessId()
+        + setCustomerEmail()
+        + setCustomerName()
+        + setDeliveryAddress()
+        + setDeliveryType()
+        + setNotes()
+        + setOrderReadyBy()
+        + setOrderedAt()
+        + setPlatfrom()
+        + setProducts()
+        + setPurchaseId()
+        + setStatus()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Theme {
+        ~ dark : String
+        ~ light : String
+        + Theme()
+        + Theme()
+        + getDark()
+        + getLight()
+        + setDark()
+        + setLight()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.Variant {
+        ~ name : String
+        ~ price : int
+        + Variant()
+        + Variant()
+        + getName()
+        + getPrice()
+        + setName()
+        + setPrice()
+    }
+  }
+  
+
+  namespace io.appy.domain {
+    class io.appy.domain.VariantGroup {
+        ~ name : String
+        ~ variants : List<Variant>
+        + VariantGroup()
+        + VariantGroup()
+        + getName()
+        + getVariants()
+        + setName()
+        + setVariants()
+    }
+  }
+  
+
+  io.appy.domain.BusinessFullDetails o-- io.appy.domain.Address : address
+  io.appy.domain.BusinessFullDetails o-- io.appy.domain.Appconfig : appconfig
+  io.appy.domain.BusinessFullDetails o-- io.appy.domain.Contact : contact
+  io.appy.domain.BusinessFullDetails o-- io.appy.domain.Theme : theme
+  io.appy.domain.Product o-- io.appy.domain.VariantGroup : variant
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

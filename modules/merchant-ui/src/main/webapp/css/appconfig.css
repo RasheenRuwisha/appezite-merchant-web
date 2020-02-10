@@ -1,0 +1,357 @@
+body, html{
+    margin: 0;
+    color: #fff;
+}
+
+.nav{
+    height: 50px;
+    margin: 0;
+    font-size: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+.nav-container{
+    width: 100%;
+    display: inline-block;
+}
+
+.nav-logo{
+    margin-left: 20px;
+    margin-top: 16px;
+    display: inline-block;
+    float: left;
+}
+
+.nav-user{
+    margin-right: 20px;
+    margin-top: 16px;
+    display: inline-block;
+    float: right;
+}
+
+.image-container{
+    background: url(../images/appconf.jpg) center no-repeat;
+    height: 200px;
+}
+
+.image-container::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    z-index: 1;
+    background: rgba(0,0,0,0.6);
+}
+
+.register-outer{
+    margin: 100px 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-column-gap: 3rem;
+    border: none;
+}
+
+button{
+    margin: 0;
+    float: right;
+}
+
+button:hover{
+    background: #18aebf;
+    color: #000;
+}
+
+
+
+.business-section{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.phone-container{
+    right: 6%;
+    position: absolute;
+    justify-content: right;
+    justify-items: right;
+    align-content: end;
+    width: 330px;
+}
+
+.iphone-container{
+    text-align: center;
+    width: 100%;
+    background:
+        /* top, transparent red, faked with gradient */
+            linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.45)
+            ),
+                /* bottom, image */
+            url(../images/appconf.jpg) center/cover no-repeat;
+    margin-right: 100px;
+}
+
+.iphone-container img{
+    max-width: 100%;
+    position: relative;
+    z-index: 999;
+}
+
+.iphone-logo{
+    top: 14%;
+    left: 50%;
+    transform: translate(-50%,-14%);
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background: url(../images/yourlogo.png) center/cover no-repeat;
+}
+
+.business-name-custom{
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-35%);
+    width: 190px;
+    position: absolute;
+    text-wrap: normal;
+}
+
+.acc-creation{
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #18aebf;
+    background: #18aebf;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%,-68%);
+    width: 190px;
+    position: absolute;
+    text-wrap: normal;
+}
+
+.guest-login{
+    font-family: nexa-bold;
+    padding: 10px;
+    font-size: 13px;
+    border: 2px solid #18aebf;
+    color:#18aebf;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%,-75%);
+    width: 190px;
+    position: absolute;
+    text-wrap: normal;
+}
+
+.business-login{
+    padding: 10px;
+    font-size: 10px;
+    top: 79%;
+    left: 50%;
+    transform: translate(-50%,-79%);
+    width: 190px;
+    position: absolute;
+    text-wrap: normal;
+}
+
+.powered-by{
+    padding: 10px;
+    font-size: 8px;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%,-98%);
+    width: 190px;
+    position: absolute;
+    text-wrap: normal;
+}
+
+#colorps{
+    background-color: #18aebf;
+}
+
+#color-bar{
+    border: 1px solid #7b7b7b;
+    border-radius: 4px;
+    width: 100% !important;
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+
+#color-input{
+    padding: 12px;
+    width: 100% !important;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    margin: auto;
+    font-size: 10px;
+    border: 1px solid #18aebf;
+    background: #1f1f1f;
+    color: #7b7b7b;
+    padding :10px 20px;
+    border-radius: 7px;
+}
+
+.label-heading{
+    margin-bottom: 20px;
+}
+
+#categories{
+    background: #fff;
+}
+
+.mobile-header{
+    display: grid;
+    grid-template-columns: 10% 50%;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%,-14%);
+    position: absolute;
+    height: 73px;
+    width: 87%;
+    background: #000;
+    text-align: left;
+}
+
+.category-content{
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%,-14%);
+    position: absolute;
+    width: 92%;
+    text-align: left;
+    z-index: 0;
+    height: 550px;
+    overflow: hidden;
+}
+
+.category-item{
+    position: relative;
+    border-radius: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 100px;;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.overlay{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    margin: auto;
+    width: 100%;
+    height: 100px;;
+}
+
+.category-name{
+    font-family: nexa-bold;
+    bottom: -12%;
+    left: 10%;
+    position: absolute;
+    font-size: 15px;
+}
+
+.product-item{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    border-radius: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 100px;;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.product{
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.product-desc-overlay{
+    position: absolute;
+    margin: auto;
+    width: 60%;
+    height: 100px;;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.product-name-info {
+    text-wrap: normal;
+    bottom: 60%;
+    color: black;
+    left: 4%;
+    position: absolute;
+    font-size: 15px;
+}
+
+.product-price {
+    color: black;
+    bottom: 14%;
+    left: 4%;
+    position: absolute;
+    font-size: 13px;
+}
+
+.product-hear{
+    color: #ff647c;
+    font-family: nexa-bold;
+    bottom: 1%;
+    left: 4%;
+    position: absolute;
+    font-size: 15px;
+}
+
+.product-share{
+    color: #2b2b2b;
+    font-family: nexa-bold;
+    bottom: 1%;
+    left: 20%;
+    position: absolute;
+    font-size: 15px;
+}
+
+.navigation{
+    bottom: -7%;
+    color: #fff;
+    left: 50%;
+    transform: translate(-50%,-7%);
+    position: absolute;
+    font-size: 15px;
+}
+
+
+.white-back{
+    background: #fff !important;
+}
+
+.lap-container{
+    text-align: center;
+    width: 100%;
+    background:
+        /* top, transparent red, faked with gradient */
+            linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.45)
+            ),
+                /* bottom, image */
+            url(../images/appconf.jpg) center/cover no-repeat;
+    margin-right: 100px;
+}

@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+@font-face {
+    font-family: nexa-light;
+    src: url(../fonts/NexaLight.otf);
+}
+
+@font-face {
+    font-family: nexa-bold;
+    src: url(../fonts/NexaBold.otf);
+}
+
+body, html,input,textarea{
+    font-family: nexa-light;
+}
+
+select{
+    z-index: 0;
+}
+
+.register-outer{
+    padding: 40px !important;
+    border-radius: 8px;
+    margin: auto;
+    width: 460px;
+    border: 1px solid #7b7b7b !important;
+    margin-top: 7%;
+}
+
+.register-outer .form-logo{
+    margin: 0px auto 15px;
+    width: 300px;
+}
+
+.register-outer .form-logo img{
+    width: 100%;
+}
+
+.register-message{
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+
+.form-button{
+    text-align: right;
+}
+
+.input-wrapper{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-wrapper input{
+    border: 1px solid #7b7b7b;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100% !important;
+}
+
+.input-wrapper select{
+    border: 1px solid #7b7b7b;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100% !important;
+}
+
+.input-wrapper textarea{
+    border: 1px solid #7b7b7b;
+    padding: 15px;
+    border-radius: 4px;
+    background: #1f1f1f;
+    width: 100% !important;
+}
+
+.input-wrapper .input-placeholder{
+    font-size: 13px;
+    position: absolute;
+    bottom: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #000;
+    left: 2px;
+    padding: 0 8px;
+    -webkit-transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    z-index: 1;
+    text-align: left;
+    width: 100%;
+}
+
+.input-wrapper .input-placeholder span{
+    background: var(--secondary-color);
+    padding: 0px 8px;
+}
+
+.input-wrapper input:not([disabled]):focus~.input-placeholder
+{
+    color: var(--primary-color);
+}
+
+.input-wrapper input:not([disabled]):focus~.input-placeholder,
+.input-wrapper.hasValue input:not([disabled])~.input-placeholder
+{
+    font-family: nexa-bold;
+    -webkit-transform: scale(.78) translateY(-34px) translateX(-60px);
+    transform: scale(.78) translateY(-34px) translateX(-60px);
+
+}
+
+.input-wrapper textarea:not([disabled]):focus~.input-placeholder
+{
+    color: var(--primary-color);
+}
+
+.input-wrapper textarea:not([disabled]):focus~.input-placeholder,
+.input-wrapper.hasValue textarea:not([disabled])~.input-placeholder
+{
+    font-family: nexa-bold;
+    -webkit-transform: scale(.78) translateY(-75px) translateX(-60px);
+    transform: scale(.78) translateY(-75px) translateX(-60px);
+
+}
+
+.input-wrapper select:not([disabled]):focus~.input-placeholder,
+.input-wrapper.hasValue select:not([disabled])~.input-placeholder
+{
+    font-family: nexa-bold;
+    -webkit-transform: scale(.78) translateY(-34px) translateX(-60px);
+    transform: scale(.78) translateY(-34px) translateX(-60px);
+
+}
+
+
+.iti{
+    width: 100% !important;
+    color: #fff;
+}
+
+.iti__country-list{
+    background: var(--secondary-color);
+    border-color: var(--secondary-text);
+}
+
+input,textarea{
+    color: #fff;
+}
+
+.form-button{
+    margin-top:45px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.red-border{
+    border-color: #ff647c !important;
+}
+
+.error-message{
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none ;
+}
+
+.error-message span{
+    font-family: nexa-bold;
+}
+
+
+.error-message-icons{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    position: relative;
+    margin: auto;
+    font-size: 10px;
+    border: 1px solid #18aebf;
+    background: #1f1f1f;
+    color: #7b7b7b;
+    padding :10px 20px;
+    border-radius: 7px;
+}
+
+#button {
+    width: 100%;
+    background-color: #ddd;
+}
+
+#progressbar {
+    position: absolute;
+    height: 100%;
+    padding :0px;
+    top:0%;
+    left: 0%;
+    border: none;
+    background: rgba(255,255,255,0.6);
+}
+
+.form-overlay {
+    visibility: hidden;
+    width: 100%;
+    padding: 0px;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    z-index: 9999;
+    margin: 0px auto;
+    margin: 0px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}

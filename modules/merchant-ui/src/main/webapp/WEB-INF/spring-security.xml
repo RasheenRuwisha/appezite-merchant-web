@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringSecurityFiltersConfiguredInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:uti="http://www.springframework.org/schema/util" xmlns:set="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <sec:http auto-config="true" use-expressions="true">
+        <sec:intercept-url pattern="/login" access="isAnonymous()" />
+        <sec:intercept-url pattern="/register" access="isAnonymous()" />
+        <sec:intercept-url pattern="/logout" access="isAnonymous()" />
+        <sec:intercept-url pattern="/access_denied" access="isAnonymous()" />
+        <sec:intercept-url pattern="/images/**" access="isAnonymous()" />
+        <sec:intercept-url pattern="/css/**" access="isAnonymous()" />
+        <sec:intercept-url pattern="/javascript/**" access="isAnonymous()" />
+        <sec:intercept-url pattern="/**/appconfig" access="hasRole('ROLE_ADMIN')" />
+
+        <sec:form-login login-page="/login" authentication-failure-url="/login"
+                        username-parameter="username"
+                        password-parameter="password"
+                        authentication-success-handler-ref="successHandler"/>
+
+        <sec:logout logout-success-url="/logout"/>
+
+    </sec:http>
+
+
+
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider ref="authenticationProvider">
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+
+    <bean class="io.appy.util.CustomAuthenticationProvider" id="authenticationProvider"/>
+
+    <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+
+    <bean id="successHandler" class="io.appy.util.CustomSuccessHandler"></bean>
+
+
+</beans>

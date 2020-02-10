@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+
+    <context:component-scan base-package="io.appy.controller"/>
+    <context:property-placeholder
+            location="classpath:application.properties"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <!--<bean class="hms.apptizer.admin.util.LogHelper" id="logHelper" init-method="init" destroy-method="exit"/>-->
+
+    <!--<bean class="hms.apptizer.admin.util.UserDetailsHelper" id="userDetailsHelper"/>-->
+
+    <!--<bean class="hms.apptizer.admin.client.api.impl.BusinessApiClientImpl" id="businessApiClient">-->
+        <!--<constructor-arg index="0" value="${io.apptizer.consumer.api.base.url}"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="io.apptizer.iso.client.impl.ISOServerApiClientImpl" id="isoServerApiClient">-->
+        <!--<constructor-arg index="0" value="${iso.apptizer.api.base.url}"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="io.apptizer.clover.client.impl.CloverApiClientImpl" id="cloverApiClient">-->
+        <!--<constructor-arg index="0" value="${clover.api.base.url}"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="io.apptizer.registration.client.impl.CommonRegistrationApiClientImpl" id="registrationServerApiClient">-->
+        <!--<constructor-arg index="0" value="${registration.apptizer.api.base.url}"/>-->
+    <!--</bean>-->
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basenames="classpath:application"
+          p:fileEncodings="UTF-8"
+          p:defaultEncoding="UTF-8"
+    />
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>104857600</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
+    <bean class="io.appy.api.impl.BusinessApiClientImpl" id="businessApiClient">
+        <constructor-arg index="0" value="http://localhost:8081/"/>
+    </bean>
+
+    <mvc:annotation-driven/>
+    <context:annotation-config/>
+    <mvc:resources mapping="/resources/css/**" location="/css/"/>
+    <mvc:resources mapping="/resources/javascript/**" location="/javascript/"/>
+    <mvc:resources mapping="/resources/images/**" location="/img/"/>
+    <mvc:resources mapping="/resources/fonts/**" location="/fonts/"/>
+
+
+
+</beans>
