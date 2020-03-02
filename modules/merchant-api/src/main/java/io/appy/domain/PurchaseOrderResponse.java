@@ -1,33 +1,28 @@
 package io.appy.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 import java.util.List;
 
-public class PurchaseOrders {
+public class PurchaseOrderResponse {
 
     String purchaseId;
     String businessId;
     String customerEmail;
     List<CartProduct> products;
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
-    Date orderedAt;
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
-    Date orderReadyBy;
+    String orderedAt;
+    String orderReadyBy;
     String deliveryType;
     String notes;
     String deliveryAddress;
     String customerName;
     String platfrom;
     String status;
-    String customerNumber;
-    int total;
-    int deliveryCharge;
-    public PurchaseOrders() {
+
+
+    public PurchaseOrderResponse() {
     }
 
-    public PurchaseOrders(String purchaseId, String businessId, String customerEmail, List<CartProduct> products, Date orderedAt, Date orderReadyBy, String deliveryType, String notes, String deliveryAddress, String customerName, String platfrom, String status, String customerNumber, int total, int deliveryCharge) {
+    public PurchaseOrderResponse(String purchaseId, String businessId, String customerEmail, List<CartProduct> products, String orderedAt, String orderReadyBy, String deliveryType, String notes, String deliveryAddress, String customerName, String platfrom, String status) {
         this.purchaseId = purchaseId;
         this.businessId = businessId;
         this.customerEmail = customerEmail;
@@ -40,33 +35,6 @@ public class PurchaseOrders {
         this.customerName = customerName;
         this.platfrom = platfrom;
         this.status = status;
-        this.customerNumber = customerNumber;
-        this.total = total;
-        this.deliveryCharge = deliveryCharge;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public int getDeliveryCharge() {
-        return deliveryCharge;
-    }
-
-    public void setDeliveryCharge(int deliveryCharge) {
-        this.deliveryCharge = deliveryCharge;
-    }
-
-    public String getCustomerNumber() {
-        return customerNumber;
-    }
-
-    public void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
     }
 
     public String getPurchaseId() {
@@ -101,19 +69,19 @@ public class PurchaseOrders {
         this.products = products;
     }
 
-    public Date getOrderedAt() {
+    public String getOrderedAt() {
         return orderedAt;
     }
 
-    public void setOrderedAt(Date orderedAt) {
+    public void setOrderedAt(String orderedAt) {
         this.orderedAt = orderedAt;
     }
 
-    public Date getOrderReadyBy() {
+    public String getOrderReadyBy() {
         return orderReadyBy;
     }
 
-    public void setOrderReadyBy(Date orderReadyBy) {
+    public void setOrderReadyBy(String orderReadyBy) {
         this.orderReadyBy = orderReadyBy;
     }
 

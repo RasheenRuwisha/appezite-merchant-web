@@ -9,16 +9,35 @@ public class Category {
     String name;
     String categoryId;
     Boolean visibility;
+    String businessId;
 
     public Category() {
     }
 
-    public Category(String docType, String image, String name, String categoryId, Boolean visibility) {
+
+    public Category(String docType, String image, String name, String categoryId, Boolean visibility, String businessId) {
         this.docType = docType;
         this.image = image;
         this.name = name;
         this.categoryId = categoryId;
         this.visibility = visibility;
+        this.businessId = businessId;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 
     public String getImage() {

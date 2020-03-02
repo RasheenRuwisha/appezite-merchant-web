@@ -17,7 +17,7 @@
 
                     <div class="form-group">
                         <label for="prd-nam">Category Name</label>
-                        <input class="form-control" type="text" name="cate-name" id="edit-category-name">
+                        <input class="form-control" type="text" name="name" id="edit-category-name">
                         <small id="cat-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter category name.</small>
                     </div>
 

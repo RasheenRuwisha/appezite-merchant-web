@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/appconfig.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/colorpicker.css"/>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <script src="<c:url value="/resources/javascript/font-awesome.js"/>"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -53,71 +54,45 @@
 <div class="register-outer">
                 <div>
                     <p>Business Details</p>
-                    <div class="input-wrapper">
-                        <textarea type="text" rows="4" name="description" id="business-desciption"></textarea>
-                        <div class="input-placeholder"><span>Description</span></div>
-                    </div>
-                    <div id="email-null" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                            <i class="fal fa-exclamation-circle"></i>
-                            Enter description
-                        </span>
+
+                    <div class="form-group">
+                        <label for="business-desciption">Description</label>
+                        <textarea class="form-control" id="business-desciption" rows="3"></textarea>
                     </div>
 
-                    <div class="input-wrapper">
-                        <form:input type="text" path="address.line1" id="business-address"/>
-                        <div class="input-placeholder"><span>Address Line 1</span></div>
-                    </div>
-                    <div id="address-null" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                        <i class="fal fa-exclamation-circle"></i>
-                        Enter address line 1
-                        </span>
+                    <div class="form-group">
+                        <label for="business-address">Address Line 1</label>
+                        <form:input class="form-control" type="text" path="address.line1" id="business-address"/>
+                        <small id="address-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter address line 1</small>
                     </div>
 
-                    <div class="input-wrapper">
-                        <form:input type="text" path="address.line2" id="business-address-2"/>
-                        <div class="input-placeholder"><span>Address Line 2</span></div>
-                    </div>
-                    <div id="address-null-2" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                        <i class="fal fa-exclamation-circle"></i>
-                        Enter address line 2
-                        </span>
+                    <div class="form-group">
+                        <label for="business-address-2">Address Line 2</label>
+                        <form:input class="form-control" type="text" path="address.line2" id="business-address-2"/>
+                        <small id="address-null-2" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter address line 1</small>
                     </div>
 
-                    <div class="input-wrapper">
-                        <form:input type="text" path="address.street" id="business-state"/>
-                        <div class="input-placeholder"><span>State</span></div>
-                    </div>
-                    <div id="state-null" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                        <i class="fal fa-exclamation-circle"></i>
-                        Enter state
-                        </span>
+                    <div class="form-group">
+                        <label for="business-city">City</label>
+                        <form:input class="form-control"  type="text" path="address.city" id="business-city"/>
+                        <small id="city-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter city</small>
                     </div>
 
-                    <div class="input-wrapper">
-                        <form:input type="text" path="address.city" id="business-city"/>
-                        <div class="input-placeholder"><span>City</span></div>
-                    </div>
-                    <div id="city-null" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                        <i class="fal fa-exclamation-circle"></i>
-                        Enter city
-                        </span>
+
+
+                    <div class="form-group">
+                        <label for="business-state">State</label>
+                        <form:input class="form-control"  type="text" path="address.street" id="business-state"/>
+                        <small id="state-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter state</small>
                     </div>
 
-                    <div class="input-wrapper">
-                        <form:input type="text" path="address.zip" id="business-zip"/>
-                        <div class="input-placeholder"><span>Zip</span></div>
+
+                    <div class="form-group">
+                        <label for="business-state">Zip</label>
+                        <form:input class="form-control"  type="text" path="address.zip" id="business-zip"/>
+                        <small id="zip-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter zip</small>
                     </div>
-                    <div id="zip-null" class="error-message">
-                        <span style="font-size: 0.6em; color: #ff647c;">
-                        <i class="fal fa-exclamation-circle"></i>
-                        Enter zip
-                        </span>
-                    </div>
+
 
                 </div>
 
@@ -127,13 +102,25 @@
 
                     <p>Select a theme color for your business</p>
 
-                    <div id="color-bar">
-                        <form:input id="color-input" name="color" value="#18aebf" path="theme.dark"/>
-                        <input type="text" id="colorps">
+                    <div class="form-group">
+                        <label for="business-state">Dark theme</label>
+                        <div class="color-bar">
+                            <form:input id="color-input" name="color" value="#18aebf" path="theme.dark"/>
+                            <input type="text" id="colorps">
+                        </div>
                     </div>
-                    <form:input id="light-color-input" name="color" value="#18aebf" path="theme.light" style="display:none"/>
 
-                    <p class="label-heading">Select a logo for your business</p>
+                    <div class="form-group">
+                        <label for="business-state">Text color</label>
+                        <div class="color-bar">
+                            <form:input id="color-light-input" name="color" value="#18aebf" path="theme.light"/>
+                            <input type="text" id="colorlightps">
+                        </div>
+                    </div>
+
+
+
+                    <p style="margin-top: 5px" class="label-heading">Select a logo for your business</p>
                     <label for="logo-file" class="custom-file-upload" id="logo-image">
                         Choose Image
                     </label>
@@ -208,11 +195,11 @@
                 </div>
                 <p class="business-name-custom">Welcome to <span id="business-name-change">${business.name}</span> </p>
 
-                <div class="acc-creation">
+                <div class="acc-creation" style="color: white">
                     CREATE AN ACCOUNT
                 </div>
 
-                <div class="guest-login">
+                <div class="guest-login"  style="margin-top: 10px;">
                     CONTINUE AS GUEST
                 </div>
 
@@ -226,7 +213,7 @@
             <div id="categories" style="display: none">
 
                 <div class="mobile-header">
-                    <i class="fad fa-bars" style="margin:auto;padding-top: 26px;"></i><p style="padding-left: 10px;padding-top: 27px;">Categories</p>
+                    <i class="fad fa-bars" style="margin:auto;padding-top: 26px;"></i><p style="padding-left: 10px;padding-top: 36px;">Categories</p>
                 </div>
 
                 <div class="category-content">
@@ -266,7 +253,7 @@
             <div id="products" style="display:none;">
 
                 <div class="mobile-header">
-                    <i class="fad fa-bars" style="margin:auto;padding-top: 26px;"></i><p style="padding-left: 10px;padding-top: 27px;">Coffee</p>
+                    <i class="fad fa-bars" style="margin:auto;padding-top: 26px;"></i><p style="padding-left: 10px;padding-top: 36px;">Coffee</p>
                 </div>
 
                 <div class="category-content">
@@ -406,38 +393,26 @@
             onChange: function (hsb, hex, rgb) {
                 $('#colorps').css('backgroundColor', '#' + hex);
                 $('#color-input').val('#'+hex)
-                $('#light-color-input').val('#'+hex)
                 $('.acc-creation').css('backgroundColor', '#' + hex);
                 $('.acc-creation').css('borderColor', '#' + hex);
                 $('.guest-login').css('borderColor', '#' + hex);
-                $('.guest-login').css('color', '#' + hex);
                 $('.mobile-header').css('backgroundColor', '#' + hex);
             }
         });
 
     })
-    $(function () {
 
-        $(".input-wrapper .input-placeholder").on("click", function () {
-            $(this).closest(".input-wrapper").find("input").focus();
-        });
-        $(".input-wrapper input").on("keyup", function () {
-            var value = $.trim($(this).val());
-            if (value) {
-                $(this).closest(".input-wrapper").addClass("hasValue");
-            } else {
-                $(this).closest(".input-wrapper").removeClass("hasValue");
-            }
-        });
-        $(".input-wrapper textarea").on("keyup", function () {
-            var value = $.trim($(this).val());
-            if (value) {
-                $(this).closest(".input-wrapper").addClass("hasValue");
-            } else {
-                $(this).closest(".input-wrapper").removeClass("hasValue");
+    $(function (){
+        $("#colorlightps").ColorPicker({
+            color: '#18aebf',
+            onChange: function (hsb, hex, rgb) {
+                $('#colorlightps').css('backgroundColor', '#' + hex);
+                $('#color-light-input').val('#'+hex)
+                $('.guest-login').css('color', '#' + hex);
             }
         });
 
-    });
+    })
+
 </script>
 </html>

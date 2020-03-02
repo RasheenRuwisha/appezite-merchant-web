@@ -45,7 +45,7 @@ body, html{
 }
 
 .register-outer{
-    margin: 100px 50px;
+    margin: 14px 50px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -116,6 +116,7 @@ button:hover{
     width: 190px;
     position: absolute;
     text-wrap: normal;
+    color: #fff;
 }
 
 .acc-creation{
@@ -154,6 +155,8 @@ button:hover{
     width: 190px;
     position: absolute;
     text-wrap: normal;
+    margin-top: 15px;
+    color: #fff;
 }
 
 .powered-by{
@@ -165,13 +168,17 @@ button:hover{
     width: 190px;
     position: absolute;
     text-wrap: normal;
+    color: #fff;
 }
 
 #colorps{
     background-color: #18aebf;
 }
+#colorlightps{
+    background-color: #18aebf;
+}
 
-#color-bar{
+.color-bar{
     border: 1px solid #7b7b7b;
     border-radius: 4px;
     width: 100% !important;
@@ -180,7 +187,12 @@ button:hover{
 }
 
 #color-input{
-    padding: 12px;
+    padding: 5px;
+    width: 100% !important;
+}
+
+#color-light-input{
+    padding: 5px;
     width: 100% !important;
 }
 
@@ -190,9 +202,9 @@ input[type="file"] {
 .custom-file-upload {
     margin: auto;
     font-size: 10px;
-    border: 1px solid #18aebf;
-    background: #1f1f1f;
-    color: #7b7b7b;
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
     padding :10px 20px;
     border-radius: 7px;
 }
@@ -214,8 +226,9 @@ input[type="file"] {
     position: absolute;
     height: 73px;
     width: 87%;
-    background: #000;
+    background: #18aebf;
     text-align: left;
+    color: #fff;
 }
 
 .category-content{
@@ -257,6 +270,7 @@ input[type="file"] {
     left: 10%;
     position: absolute;
     font-size: 15px;
+    color: #fff;
 }
 
 .product-item{
@@ -330,7 +344,7 @@ input[type="file"] {
 
 .navigation{
     bottom: -7%;
-    color: #fff;
+    color: #000;
     left: 50%;
     transform: translate(-50%,-7%);
     position: absolute;

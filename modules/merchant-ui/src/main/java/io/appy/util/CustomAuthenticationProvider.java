@@ -35,14 +35,6 @@ import java.util.List;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    @Value("#{'${apptizer.admin.users}'.split(',')}")
-    private List<String> adminUserList;
-
-    @Value("#{'${apptizer.super.admins}'.split(',')}")
-    private List<String> superAdminUserList;
-
-    @Value("${client.id}")
-    private String CLIENT_ID;
 
 
     BusinessApiClientImpl businessApiClient = new BusinessApiClientImpl("http://localhost:8081/");
@@ -65,6 +57,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 loginAjaxRes.setPage("appconfig");
             } else {
+                grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 loginAjaxRes.setPage("appconfiged");
             }
             Authentication auth = new UsernamePasswordAuthenticationToken(loginAjaxRes, token, grantedAuths);
@@ -77,21 +70,5 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         boolean equals = authentication.equals(UsernamePasswordAuthenticationToken.class);
         return equals;
-    }
-
-    private boolean isValidUser(String email,String password) {
-        boolean isUserValid = false;
-
-        return isUserValid;
-    }
-
-    private boolean isUserSuperAdmin(String email){
-        boolean isSuperAdmin = false;
-        for(String userMail : superAdminUserList){
-            if(userMail.equals(email)){
-                isSuperAdmin = true;
-            }
-        }
-        return isSuperAdmin;
     }
 }

@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
 
     <script src="<c:url value="/resources/javascript/font-awesome.js"/>"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput-jquery.js"></script>
@@ -49,115 +50,88 @@
             </c:if>
 
             <c:if test="${filledDetails.name eq null}">
-                <div class="input-wrapper">
-                    <input type="text" name="name" id="business-name">
-                    <div class="input-placeholder"><span>Business Name</span></div>
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input class="form-control" type="text" name="name" id="business-name">
+                    <small id="business-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter business name.</small>
                 </div>
             </c:if>
             <c:if test="${filledDetails.name ne null}">
-                <div class="input-wrapper hasValue">
-                    <input type="text" name="name" id="business-name" value="${filledDetails.name}">
-                    <div class="input-placeholder"><span>Business Name</span></div>
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input class="form-control" type="text" name="name" id="business-name" value="${filledDetails.name}">
+                    <small id="business-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter business name.</small>
                 </div>
             </c:if>
 
-            <div id="business-name-null" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                   Enter business name
-                </span>
-            </div>
-
-
-
             <c:if test="${filledDetails.email eq null}">
-                <div class="input-wrapper">
-                    <input type="email" name="email" id="business-email">
-                    <div class="input-placeholder"><span>Email</span></div>
+                <div class="form-group">
+                    <label>Business Email</label>
+                    <input class="form-control" type="email" name="email" id="business-email">
+                    <small id="email-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter email.</small>
+                    <small id="email-exist" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Email already in use.</small>
+
                 </div>
             </c:if>
 
             <c:if test="${filledDetails.email ne null}">
-                <div class="input-wrapper hasValue">
-                    <input type="email" name="email" id="business-email" value="${filledDetails.email}">
-                    <div class="input-placeholder"><span>Email</span></div>
+                <div class="form-group">
+                    <label>Business Email</label>
+                    <input class="form-control" type="email" name="email" id="business-email" value="${filledDetails.email}">
+                    <small id="email-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter email.</small>
+                    <small id="email-exist" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Email already in use.</small>
+
                 </div>
             </c:if>
-            <div id="email-null" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                    Enter email
-                </span>
-            </div>
-            <div id="email-exist" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                    Email already in use
-                </span>
-            </div>
+
 
             <c:if test="${filledDetails.password eq null}">
-                <div class="input-wrapper">
-                    <input type="password" name="password" id="business-password">
-                    <div class="input-placeholder"><span>Password</span></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" id="business-password">
+                    <small id="password-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter password.</small>
                 </div>
-                <div class="input-wrapper">
-                    <input type="password" name="business-confirm-password" id="business-confirm-password">
-                    <div class="input-placeholder"><span>Confirm Password</span></div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input class="form-control" type="password" name="business-confirm-password" id="business-confirm-password">
+                    <small id="confrim-pass-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Confirm your password!</small>
+                    <small id="password-mismatch" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>       Passwords do not match. Try again!</small>
                 </div>
             </c:if>
             <c:if test="${filledDetails.password ne null}">
-                <div class="input-wrapper hasValue">
-                    <input type="password" name="password" id="business-password" value="${filledDetails.password}">
-                    <div class="input-placeholder"><span>Password</span></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" id="business-password" value="${filledDetails.email}">
+                    <small id="password-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter password.</small>
                 </div>
-                <div class="input-wrapper hasValue">
-                    <input type="password" name="business-confirm-password" id="business-confirm-password" value="${filledDetails.password}">
-                    <div class="input-placeholder"><span>Confirm Password</span></div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input class="form-control" type="password" name="business-confirm-password" id="business-confirm-password" value="${filledDetails.email}">
+                    <small id="confrim-pass-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Confirm your password!</small>
+                    <small id="password-mismatch" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>       Passwords do not match. Try again!</small>
                 </div>
             </c:if>
 
-            <div id="password-null" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                    Enter password
-                </span>
+
+
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input class="form-control" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="phone" id="business-phone" placeholder="Phone">
+                <small id="phone-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>   Enter Phone number</small>
             </div>
 
 
-            <div id="confrim-pass-null" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                     Confirm your password!
-                </span>
-            </div>
-
-            <div id="password-mismatch" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                     Passwords do not match. Try again.
-                </span>
-            </div>
-
-
-            <div class="input-wrapper">
-                <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="phone" id="business-phone" placeholder="Phone">
-            </div>
 
             <input style="display: none" name="country" id="country">
             <input style="display: none" name="countryCode" id="countryCode">
 
-            <div id="phone-null" class="error-message">
-                <span style="font-size: 0.6em; color: #ff647c;">
-                    <i class="fal fa-exclamation-circle"></i>
-                    Enter Phone number
-                </span>
-            </div>
 
-            <div class="form-button btn btn-outline-secondary">
-                <button style="float: right;width: 24%;" type="submit" class="btn btn-outline-secondary">Register</button>
-            </div>
-
+     <div class="form-button">
+            <button  style="float: right;width: 24%;" type="submit" class="btn btn-outline-secondary">Register</button>
+        </div>
         </div>
 
 

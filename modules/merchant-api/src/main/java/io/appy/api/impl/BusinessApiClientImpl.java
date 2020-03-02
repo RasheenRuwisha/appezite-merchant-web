@@ -16,6 +16,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,7 +84,7 @@ public class BusinessApiClientImpl implements BusinessApiClient {
     }
 
     @Override
-    public BusinessFullDetails updateBusinessDetails(BusinessFullDetails businessFullDetails) {
+    public BusinessFullDetails updateBusinessDetails(BusinessFullDetails businessFullDetails, String email) {
         UriBuilder builder = UriBuilder
                 .fromPath(merchantApiBaseUrl)
                 .path("/updateBusiness");
@@ -91,7 +92,7 @@ public class BusinessApiClientImpl implements BusinessApiClient {
         BusinessFullDetails response = new BusinessFullDetails();
         try{
             WebTarget webResource = client.target(uri);
-            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",businessFullDetails.getEmail()).post(Entity.entity(businessFullDetails, MediaType.APPLICATION_JSON), BusinessFullDetails.class);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).post(Entity.entity(businessFullDetails, MediaType.APPLICATION_JSON), BusinessFullDetails.class);
         }catch (Exception ex){
 
         }
@@ -249,6 +250,95 @@ public class BusinessApiClientImpl implements BusinessApiClient {
             WebTarget webResource = client.target(uri);
             webResource = webResource.queryParam("businessId",businessId);
             response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).post(Entity.entity(orderUpdate, MediaType.APPLICATION_JSON),PurchaseOrders.class);
+        }catch (Exception ex){
+
+        }
+        return response;
+    }
+
+    @Override
+    public Category removeCategory(String categoryId, String email, String businessId) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/removeCategory");
+        URI uri = builder.build();
+        Category response = new Category();
+        try{
+            WebTarget webResource = client.target(uri);
+            webResource = webResource.queryParam("businessId",businessId);
+            webResource = webResource.queryParam("categoryId",categoryId);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).get(Category.class);
+        }catch (Exception ex){
+
+        }
+        return response;
+    }
+
+    @Override
+    public PurchaseOrders getPurchaseOrder(String email, String businessId, String purchaseOrderID) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/getOrder");
+        URI uri = builder.build();
+        PurchaseOrders  response = new PurchaseOrders();
+        try{
+            WebTarget webResource = client.target(uri);
+            webResource = webResource.queryParam("businessId",businessId);
+            webResource = webResource.queryParam("orderId",purchaseOrderID);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).get(PurchaseOrders.class);
+        }catch (Exception ex){
+            System.out.printf("as");
+        }
+        return response;
+    }
+
+    @Override
+    public Products batchUploadProduct(String email, String businessId, List<Product> products) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/batchUploadProduct");
+        URI uri = builder.build();
+        Products response = new Products();
+        try{
+            WebTarget webResource = client.target(uri);
+            webResource = webResource.queryParam("businessId",businessId);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).post(Entity.entity(products, MediaType.APPLICATION_JSON),Products.class);
+        }catch (Exception ex){
+
+        }
+        return response;
+    }
+
+    @Override
+    public Category getCategoryByName(String email, String businessId, String catName) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/getCategoryByName");
+        URI uri = builder.build();
+        Category  response = new Category();
+        try{
+            WebTarget webResource = client.target(uri);
+            webResource = webResource.queryParam("businessId",businessId);
+            webResource = webResource.queryParam("name",catName);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).get(Category.class);
+        }catch (Exception ex){
+            System.out.printf("as");
+        }
+        return response;
+    }
+
+
+    @Override
+    public Categories batchUploadCategory(String email, String businessId, List<Category> categories) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/batchUploadCategory");
+        URI uri = builder.build();
+        Categories response = new Categories();
+        try{
+            WebTarget webResource = client.target(uri);
+            webResource = webResource.queryParam("businessId",businessId);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).post(Entity.entity(categories, MediaType.APPLICATION_JSON),Categories.class);
         }catch (Exception ex){
 
         }

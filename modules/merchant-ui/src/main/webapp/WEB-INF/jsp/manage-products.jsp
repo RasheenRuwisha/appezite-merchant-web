@@ -51,6 +51,17 @@
                 <p>No Products available.</p>
                 <p>Lets add some!</p>
                 <button data-toggle="modal" data-target="#add-product-modal" class="btn btn-outline-secondary" id="myBtn">Add Product</button>
+
+                <form method="post" enctype="multipart/form-data"
+                      action="/merchant/${businessId}/batchUploadProductCSV">
+
+                    <label id="prd-csv" for="prd-csv-in" class="prd-image custom-file-upload">
+                        Choose Image
+                    </label>
+
+                    <input id="prd-csv-in" type="file" name="file" accept=".xls,.xlsx"><br><br>
+                    <input type="submit" value="Upload file" />
+                </form>
             </div>
         </c:when>
         <c:otherwise>
@@ -67,12 +78,45 @@
                 <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
                 <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
 
-                <input type="radio" name="main-tab" id="tab14" aria-controls="settings">
+                <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
                 <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
 
-                <button id="add-prd" class="add-btn btn btn-outline-secondary"  data-toggle="modal" data-target="#add-product-modal">Add Product</button>
 
-                <button id="import" class="btn btn-outline-secondary" >Import CSV</button>
+                <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
+                <a href="/merchant/${business.businessId}/manageImages">Images</a>
+
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#add-product-modal">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+
+                <button id="add-prd" class="add-btn btn btn-outline-secondary"  >Add Product</button>
+
+                <form id="csv-upload" method="post" enctype="multipart/form-data"
+                      action="/merchant/${businessId}/batchUploadProductCSV">
+                    <label id="prd-csv1" for="prd-csv-in1" class="prd-image custom-file-upload">
+                        Upload Products via CSV
+                    </label>
+                    <input id="prd-csv-in1" type="file" name="file" accept=".xls,.xlsx" onchange="submitCsvForm()"><br><br>
+                </form>
+
+
+                <form id="json-upload" method="post" enctype="multipart/form-data"
+                      action="/merchant/${businessId}/batchUploadProductJSON">
+
+                    <label id="prd-csv2" for="prd-csv-in2" class="prd-image custom-file-upload">
+                        Upload products via json
+                    </label>
+
+                    <input id="prd-csv-in2" type="file" name="file" accept=".json" onchange="submitJsonForm()"><br><br>
+                </form>
 
                 <div class="tab-panels">
                     <section id="products" class="tab-panel">
@@ -85,7 +129,8 @@
                                     </div>
                                     <div class="product-card-overlay">
                                         <p class="product-name">${prdocut.name}</p>
-                                        <p class="function-p"><span data-toggle="modal" data-target="#${prdocut.productId}">Edit</span> &nbsp; <span onclick="removeProduct('<c:url value="/${business.businessId}/removeProduct?email=${business.email}&productId=${prdocut.productId}"/>')">Remove </span></p>
+                                        <p class="function-p"><span data-toggle="modal" data-target="#${prdocut.productId}">Edit</span> &nbsp;
+                                            <span onclick="initProductRemoveModal('${prdocut.name}','<c:url value="/${business.businessId}/removeProduct?email=${business.email}&productId=${prdocut.productId}"/>')">Remove </span></p>
                                     </div>
                                 </div>
                             </c:if>
@@ -116,7 +161,7 @@
                     <p style="text-align: center">Edit Product</p>
                     <div class="form-container">
 
-                        <div class="tabset">
+                        <div class="tabsetp">
                             <!-- Tab 1 -->
                             <input checked type="radio" name="${prdocut.productId}" id="${prdocut.productId}tab1" aria-controls="${prdocut.productId}-basic" >
                             <label for="${prdocut.productId}tab1">Basic</label>
@@ -153,34 +198,36 @@
                                         </div>
 
                                         <div class="input-placeholder"><span>Product Category</span></div>
-                                        <div class="input-group">
-                                            <select class="form-control" id="${prdocut.productId}-cat-id">
-                                                <c:forEach items="${categories}" var="cate">
+                                            <div class="input-group">
+                                                <select class="form-control" id="${prdocut.productId}-cat-id">
+                                                    <c:forEach items="${categories}" var="cate">
 
-                                                    <c:choose>
-                                                        <c:when test="${prdocut.categoryId.size() > 0}">
-                                                            <c:forEach items="${prdocut.categoryId}" var="prdcat">
-                                                                <c:if test="${cate.categoryId ne prdcat && cate.visibility == true}">
-                                                                    <option value="${cate.categoryId}">${cate.name}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="${cate.categoryId}">${cate.name}</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${prdocut.categoryId.size() > 0}">
+                                                                <c:forEach items="${prdocut.categoryId}" var="prdcat">
+                                                                    <c:if test="${cate.categoryId ne prdcat && cate.visibility == true}">
+                                                                        <option value="${cate.categoryId}">${cate.name}</option>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${cate.categoryId}">${cate.name}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
 
-                                                </c:forEach>
-                                            </select>
-
-                                        </div>
+                                                    </c:forEach>
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button  onclick="addEditProductCategory('${prdocut.productId}')" class="btn btn-outline-secondary" type="button">  <i class="far fa-plus-circle"  style="font-size: 1.5rem"></i></button>
+                                                </div>
+                                            </div>
 
 
                                             <div id="${prdocut.productId}-product-categories">
                                                 <c:forEach items="${prdocut.categoryId}" var="prdcat">
                                                     <c:forEach items="${categories}" var="cate">
                                                         <c:if test="${cate.categoryId eq prdcat && cate.visibility == true}">
-                                                            <h5><span data-id='${cate.categoryId}' class="badge badge-secondary">${cate.name} <i class="fad fa-times" onclick="removeEditProductCategory('${prdocut.productId}','${cate.name}','${cate.categoryId}',this)"></i></span></h5>
+                                                            <h5><span name="${prdocut.productId}-categories" data-id='${cate.categoryId}' class="badge badge-secondary">${cate.name} <i class="fad fa-times" onclick="removeEditProductCategory('${prdocut.productId}','${cate.name}','${cate.categoryId}',this)"></i></span></h5>
                                                         </c:if>
                                                     </c:forEach>
                                                 </c:forEach>
@@ -192,8 +239,8 @@
                                                 Choose Image
                                             </label>
                                             <input id="${prdocut.productId}-file" type="file" name="myFile" accept="image/*" onchange="editProductImage(this,'#${prdocut.productId}-prd-url','#${prdocut.productId}-add-prd-modal-overlay-disable');"><br><br>
-                                            <input style="display: none" type="text" value="${prdocut.image}" id="${prdocut.productId}-prd-url">
-                                            <div id="prd-null" class="error-message-icons">
+                                            <input style="display: none" type="text" value="${prdocut.image}" id="${prdocut.productId}prd-url">
+                                            <div id="${prdocut.productId}prd-null" class="error-message-icons">
                         <span style="font-size: 0.6em; color: #ff647c;">
                         <i class="fal fa-exclamation-circle"></i>
                         Select a product image
@@ -403,6 +450,8 @@
 
 <jsp:include page="components/add-category-modal.jsp"/>
 <jsp:include page="components/add-product-modal.jsp"></jsp:include>
+<jsp:include page="components/remove-product-modal.jsp"></jsp:include>
+
 </body>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tab-controls.css"/>">
 <script src="<c:url value="/resources/javascript/modal.js"/>"></script>

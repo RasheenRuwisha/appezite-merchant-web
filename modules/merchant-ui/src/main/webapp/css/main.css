@@ -10,8 +10,8 @@ html, body, input,select{
     height: 50px;
     margin: 0;
     font-size: 20px;
-    background-color: #fff;
-    color: #000;
+    background-color: #54bf58e3;
+    color: #fff;
 }
 
 .nav-container{
@@ -48,11 +48,6 @@ html, body, input,select{
     font-size: 2rem;
 }
 
-button{
-    margin: auto;
-    float: none;
-    width: 100%;
-}
 
 .add-category-image{
      text-align: center;
@@ -247,7 +242,7 @@ button{
     box-shadow: 0 12px 25px 0 rgba(0, 0, 0, 0.2), 0 15px 32px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
     display: block;
-    height: 186px;
+    height: 256px;
 }
 
 .setting-controls{
@@ -362,4 +357,131 @@ a:active {
     border: none;
     height: 26px;
     padding: 0px 0px 0px 10px;
+}
+
+
+.switch {
+    display: inline-block;
+    position: relative;
+    height: 22px;
+    width: 64px;
+    border-radius: 5px;
+    background-color: #005494;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 5px;
+}
+
+.slider:before {
+    height: 17px;
+    width: 32px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    bottom: 3px;
+    content: "";
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #005494;
+}
+
+input:checked + .slider:before {
+    transform: translateX(100%);
+}
+
+.slider.round {
+}
+
+.slider.round:before {
+}
+
+
+.modal-loader{
+    padding: 20px 0px;
+    text-align: center;
+    margin: auto;
+}
+
+.hide{
+    display: none !important;
+}
+
+
+.po-items {
+    padding-top: 15px;
+}
+
+.po-items .header-row {
+    color: #777;
+    font-weight: bold;
+    padding: 5px 0px;
+    margin: 0px;
+    border-bottom: 1px solid rgb(229, 229, 229)
+}
+
+.po-items .item-row {
+    margin: 10px 0px;
+}
+
+.po-items .item-row-sub-headings {
+    margin: 6px 0px 0px;
+}
+
+.po-items .footer-row {
+    color: darkgrey;
+    font-weight: bold;
+    padding: 5px 0px;
+    margin: 10px 0px 0px 0px;
+    border-top: 1px solid rgb(229, 229, 229);
+}
+
+.po-sub-info {
+    padding-top: 0px;
+}
+
+.po-sub-info .footer-row {
+    color: #777;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+    border-top: 1px solid rgb(229, 229, 229);
+}
+.po-sub-info  .footer-row .sub-info-values {
+    color: #333;
+    font-weight: normal;
+}
+
+.po-sub-info .item-row {
+    margin: 10px 0px;
+}
+.po-grand-totol-area {
+    padding-top: 0px;
+}
+
+.po-grand-totol-area  .footer-row {
+    color: #777;
+    font-weight: bold;
+    padding:10px 0px 5px 0px;
+    margin: 0px;
+    border-top: 1px solid rgb(229, 229, 229);
+}
+
+.po-grand-totol-area  .footer-row .grand-total {
+    color: #333;
+    font-weight: bold;
 }

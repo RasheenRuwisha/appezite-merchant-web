@@ -158,16 +158,6 @@ function removeCategory(url) {
         url: url,
         type: "POST",
         contentType: "application/json",
-        success: function (response,data) {
-            console.log("response");
-            reloadpaage();
-        },
-        error: function (error) {
-            reloadpaage();
-
-            console.log("error")
-            console.log(error)
-        }
     });
 
 }
@@ -177,7 +167,7 @@ function addProductCategory(){
     if($("#cat-id :selected").text() == ""){
         alert("No more categories")
     }else{
-        $("#product-categories").append(`<h5><span data-id='${$("#cat-id :selected").val()}' class="badge badge-secondary">${$("#cat-id :selected").text()} <i class="fad fa-times" onclick="removeProductCategory('${$("#cat-id :selected").text()}','${$("#cat-id :selected").val()}',this)"></i></span></h5>`)
+        $("#product-categories").append(`<h5><span name="categories" data-id='${$("#cat-id :selected").val()}' class="badge badge-secondary">${$("#cat-id :selected").text()} <i class="fad fa-times" onclick="removeProductCategory('${$("#cat-id :selected").text()}','${$("#cat-id :selected").val()}',this)"></i></span></h5>`)
         $("#cat-id :selected").remove();
         $("#prd-category").val($("#cat-id :selected").text())
     }
@@ -195,7 +185,7 @@ function addEditProductCategory(productId){
     if($("#"+productId+"-cat-id :selected").text() == ""){
         alert("No more categories")
     }else{
-        $("#"+productId+"-product-categories").append(`<input type="text" name="${productId}-categories" value='${$("#"+productId+"-cat-id :selected").text()}' data-id='${$("#"+productId+"-cat-id :selected").val()}'>`)
+        $("#"+productId+"-product-categories").append(`<h5><span name="${productId}-categories" data-id='${$("#"+productId+"-cat-id :selected").val()}' class="badge badge-secondary">${$("#"+productId+"-cat-id :selected").text()} <i class="fad fa-times" onclick="removeEditProductCategory('${productId}','${$("#"+productId+"-cat-id :selected").text()}','${$("#"+productId+"-cat-id :selected").val()}',this)"></i></span></h5>`)
         $("#"+productId+"-cat-id :selected").remove();
         $("#"+productId+"-prd-category").val($("#"+productId+"-cat-id :selected").text())
     }
@@ -220,3 +210,58 @@ function initCategoryModal(name, url,categoryId){
             "            ),url("+url+")  center/cover no-repeat");
     $("#edit-category-modal").modal('toggle');
 }
+
+
+function initCategoryRemoveModal(categoryName, url){
+    $("#remove-category-name").text(categoryName);
+    $("#remove-category-form").attr('action', url);
+    $("#remove-category-modal").modal('toggle');
+}
+
+
+function validateCatName(){
+    let email = $("#cat-name").val().trim();
+    if(email === ""){
+        $("#cat-name").addClass("red-border")
+        $("#cat-name-null").css("display","block");
+    }else{
+        $("#cat-name").removeClass("red-border")
+        $("#cat-name-null").css("display","none");
+        return true;
+    }
+    return false;
+}
+
+
+
+
+function validateCatImage(){
+    let email = $("#cat-url").val().trim();
+    if(email === ""){
+        $("#cat-null").css("display","block");
+    }else{
+        $("#cat-null").css("display","none");
+        return true;
+    }
+    return false;
+}
+
+
+function validateCatFields(){
+    let validData = false;
+    validData = validateCatName();
+    validData= validateCatImage();
+    return validData;
+}
+
+document.getElementById( 'add-category-form' ).addEventListener('submit', function(e) {
+    if(!validateCatFields()){
+        e.preventDefault();
+    }else{
+        $("#add-cat-submit").attr("disabled",true);
+        $("#add-cat-submit").html("Submitting..");
+    }
+});
+
+
+

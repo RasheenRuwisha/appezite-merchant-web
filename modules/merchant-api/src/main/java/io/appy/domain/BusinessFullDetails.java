@@ -19,12 +19,16 @@ public class BusinessFullDetails {
     String description;
     Address address;
     String paypalSecret;
+    Boolean deliveryEnabled;
+    Boolean pickUpEnabled;
     List<DeliveryLocation> deliveryLocation;
+    int orderPreparationTime;
+    List<String> images;
 
     public BusinessFullDetails() {
     }
 
-    public BusinessFullDetails(String docType, String businessId, String country, String email, String name, Theme theme, Appconfig appconfig, Contact contact, String currency, String type, List<OpenHours> pickUpHours, List<OpenHours> deliveryHours, String description, Address address, String paypalSecret, List<DeliveryLocation> deliveryLocation) {
+    public BusinessFullDetails(String docType, String businessId, String country, String email, String name, Theme theme, Appconfig appconfig, Contact contact, String currency, String type, List<OpenHours> pickUpHours, List<OpenHours> deliveryHours, String description, Address address, String paypalSecret, Boolean deliveryEnabled, Boolean pickUpEnabled, List<DeliveryLocation> deliveryLocation, int orderPreparationTime, List<String> images) {
         this.docType = docType;
         this.businessId = businessId;
         this.country = country;
@@ -40,7 +44,43 @@ public class BusinessFullDetails {
         this.description = description;
         this.address = address;
         this.paypalSecret = paypalSecret;
+        this.deliveryEnabled = deliveryEnabled;
+        this.pickUpEnabled = pickUpEnabled;
         this.deliveryLocation = deliveryLocation;
+        this.orderPreparationTime = orderPreparationTime;
+        this.images = images;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public int getOrderPreparationTime() {
+        return orderPreparationTime;
+    }
+
+    public void setOrderPreparationTime(int orderPreparationTime) {
+        this.orderPreparationTime = orderPreparationTime;
+    }
+
+    public Boolean getPickUpEnabled() {
+        return pickUpEnabled;
+    }
+
+    public void setPickUpEnabled(Boolean pickUpEnabled) {
+        this.pickUpEnabled = pickUpEnabled;
+    }
+
+    public Boolean getDeliveryEnabled() {
+        return deliveryEnabled;
+    }
+
+    public void setDeliveryEnabled(Boolean deliveryEnabled) {
+        this.deliveryEnabled = deliveryEnabled;
     }
 
     public String getDocType() {

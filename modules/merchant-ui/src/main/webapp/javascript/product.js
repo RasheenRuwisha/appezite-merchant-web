@@ -29,8 +29,19 @@ function validatePrice(name){
     return false;
 }
 
+function validateImage(name){
+    let email = $(`#${name}prd-url`).val().trim();
+    if(email === ""){
+        $(`#${name}prd-null`).css("display","block");
+    }else{
+        $(`#${name}prd-null`).css("display","none");
+        return true;
+    }
+    return false;
+}
+
 function validateData(name){
-    return validateName(name) && validatePrice(name);
+    return validateName(name) && validatePrice(name) && validateImage(name);
 }
 
 function updateProductImage(input){
@@ -205,7 +216,7 @@ function createProduct(url,businessId) {
         let addongroup = {name:"",maximimCount:"",addonMandatory:false,addons:[]};
         let addon = {sku:"!",name:"",price:""};
 
-        $(`input[name=categories]`).each(function() {
+        $(`span[name=categories]`).each(function() {
             categoryId.push($(this).data("id"));
         });
 
@@ -326,14 +337,14 @@ function updateProduct(url,productId,businessId) {
 
         let name = $("#"+productId+"prd-name").val().trim();
         let price = $("#"+productId+"prd-price").val().trim();
-        let image = $("#"+productId+"-prd-url").val().trim();
+        let image = $("#"+productId+"prd-url").val().trim();
         let description = $("#"+productId+"-product-desciption").val().trim();
 
         let categoryId =[];
 
 
 
-        $(`input[name=${productId}-categories]`).each(function() {
+        $(`span[name=${productId}-categories]`).each(function() {
             categoryId.push($(this).data("id"));
         });
 
@@ -470,16 +481,6 @@ function removeProduct(url) {
         url: url,
         type: "POST",
         contentType: "application/json",
-        success: function (response,data) {
-            console.log("response");
-            reloadpaage();
-        },
-        error: function (error) {
-            reloadpaage();
-
-            console.log("error")
-            console.log(error)
-        }
     });
 
 }
@@ -785,4 +786,25 @@ function removeAddAddonGroup(id,index) {
     $(id).remove();
     addonitemcount.splice(index-1,1);
     accaddongroupcount-=1;
+}
+
+
+function initProductRemoveModal(categoryName, url){
+    $("#remove-product-name").text(categoryName);
+    $("#remove-product-form").attr('action', url);
+    $("#remove-product-modal").modal('toggle');
+}
+
+
+
+function submitCsvForm(){
+    $("#csv-upload").submit()
+}
+
+function submitCsvForm2(){
+    $("#csv-upload-2").submit()
+}
+
+function submitJsonForm(){
+    $("#json-upload").submit()
 }

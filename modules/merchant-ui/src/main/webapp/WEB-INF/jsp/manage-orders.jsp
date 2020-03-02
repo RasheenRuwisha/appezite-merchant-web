@@ -11,10 +11,7 @@
 <head>
     <title>Appezite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/css/intlTelInput.css">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/register.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/colorpicker.css"/>">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/modal.css"/>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <script src="<c:url value="/resources/javascript/font-awesome.js"/>"></script>
@@ -57,7 +54,7 @@
 
             <div class="tabset" style="width: 100%!important;max-width: 100%">
                 <!-- Tab 1 -->
-                <input type="radio" name="main-tab" id="tab11" aria-controls="products" checked>
+                <input type="radio" name="main-tab" id="tab11" aria-controls="products">
                 <a href="/merchant/${business.businessId}/main">Products</a>
 
                 <!-- Tab 2 -->
@@ -67,9 +64,11 @@
                 <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
                 <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
 
-                <input type="radio" name="main-tab" id="tab14" aria-controls="settings">
+                <input type="radio" name="main-tab" id="tab14" aria-controls="orders" checked>
                 <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
 
+                <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
+                <a href="/merchant/${business.businessId}/manageImages">Images</a>
 
                 <div class="tab-panels">
                     <section id="categories" class="tab-panel">
@@ -91,7 +90,7 @@
                                 </select>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit">Button</button>
+                                <button class="btn btn-outline-secondary" type="submit">Search</button>
                             </div>
                         </div>
                         </form>
@@ -140,7 +139,7 @@
                                                <i class="fad fa-times-circle" ></i>
                                            </a>
                                        </c:if>
-                                        <i class="fad fa-eye"></i>
+                                        <i class="fad fa-eye" onclick="loadOrderModal('<c:url value="/${business.businessId}/orderDetails/${order.purchaseId}"/>')"></i>
                                     </td>
                                     <c:choose>
                                         <c:when test="${order.payment eq 'Pay At Counter'}">
@@ -166,18 +165,26 @@
     </c:choose>
 </div>
 
+<script>
+    function popup(url) {
+        window.open(url, 'window', 'width=200,height=100');
+    }
+</script>
 
 
 
 
 
 
+
+<jsp:include page="components/order-details-modal.jsp"/>
 
 </body>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tab-controls.css"/>">
 <script src="<c:url value="/resources/javascript/modal.js"/>"></script>
 <script src="<c:url value="/resources/javascript/product.js"/>"></script>
 <script src="<c:url value="/resources/javascript/category.js"/>"></script>
+<script src="<c:url value="/resources/javascript/orderManagement.js"/>"></script>
 
 <script>
 

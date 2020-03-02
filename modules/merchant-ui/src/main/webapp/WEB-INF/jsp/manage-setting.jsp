@@ -54,18 +54,22 @@
 
     <div class="tabset" style="width: 100%!important;max-width: 100%">
         <!-- Tab 1 -->
-        <input type="radio" name="main-tab" id="tab11" aria-controls="products" checked>
+        <input type="radio" name="main-tab" id="tab11" aria-controls="products" >
         <a href="/merchant/${business.businessId}/main">Products</a>
 
         <!-- Tab 2 -->
         <input type="radio" name="main-tab" id="tab12" aria-controls="categories">
         <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
         <!-- Tab 3 -->
-        <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
+        <input type="radio" name="main-tab" id="tab13" aria-controls="settings" checked>
         <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
 
-        <input type="radio" name="main-tab" id="tab14" aria-controls="settings">
+        <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
         <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
+
+        <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
+        <a href="/merchant/${business.businessId}/manageImages">Images</a>
+
 
         <div class="tab-panels">
             <section id="settings" class="tab-panel">
@@ -83,9 +87,28 @@
                         <div id="payment-menu" class="setting-menu-item" onclick="showPayment()">
                             Payment
                         </div>
+                        <hr>
+                        <div id="orders-menu" class="setting-menu-item" onclick="showOrders()">
+                            Orders
+                        </div>
                     </div>
                     <div class="setting-controls">
                         <div style="padding:0px 30px" class="pickup-panel">
+<%--                            Pickup Enabled--%>
+
+<%--                            <div class="container" style="padding-left: 0px !important;">--%>
+<%--                                <label class="switch" for="checkbox-pickup">--%>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${business.pickUpEnabled}">--%>
+<%--                                            <input type="checkbox" id="checkbox-pickup" checked onchange="togglePickup()"/>--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                            <input type="checkbox" id="checkbox-pickup" onchange="togglePickup()"/>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
+<%--                                    <div class="slider round"></div>--%>
+<%--                                </label>--%>
+<%--                            </div>--%>
                             <h3>Pickup Hours</h3>
                             <div id='calendar'></div>
                             <button class="btn btn-outline-secondary" style="width: auto;margin: 30px 0px 0px 0px;" onclick="updatePickupHours()">Update
@@ -95,6 +118,21 @@
                         </div>
                         <div style="padding:0px 30px" class="delivery-panel">
 
+                            Delivery Enabled
+
+                            <div class="container" style="padding-left: 0px !important;">
+                                <label class="switch" for="checkbox">
+                                    <c:choose>
+                                        <c:when test="${business.deliveryEnabled}">
+                                            <input type="checkbox" id="checkbox" checked onchange="toggleDelivery()"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <input type="checkbox" id="checkbox" onchange="toggleDelivery()"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <div class="slider round"></div>
+                                </label>
+                            </div>
                             <div class="panel-controls">
                                 <p onclick="showTime()" class="hours-panel" style="color: #18aebf">Configure Hours</p>
                                 <p onclick="showLocations()" class="location-panel">Configure Locations</p>
@@ -255,6 +293,21 @@
                                 Update Paypal Secret
                             </button>
                         </div>
+                        <div class="order-panel" style="display: none;padding:0px 30px">
+
+                            <div class="form-group">
+                                <label for="business-paypal">Minimum order preparation time</label>
+                                <input class="form-control" type="text" name="business-orderprep"  id="business-prepearation-time" value="${business.orderPreparationTime}">
+                                <small id="order-time-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>Paypal Secret.</small>
+                            </div>
+
+
+
+                            <button class="btn btn-outline-secondary" style="width: auto;margin: 30px 0px 0px 0px;" onclick="updateOrderPrepTime()">
+                                Update Order Preparation Time
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -592,7 +645,6 @@
             }
         });
     }
-
     function updatePaypal(){
         let data = {
             paypalSecret: $('#business-paypal').val(),
@@ -649,11 +701,12 @@
             }
         });
     }
-
     function showPickUp() {
         $(".delivery-panel").css("display", "none");
         $(".payment-panel").css("display", "none");
         $(".pickup-panel").css("display", "block");
+        $(".order-panel").css("display", "none");
+        $("#orders-menu").css("color", "000");
         $("#pickup-menu").css("color", "#18aebf");
         $("#delivery-menu").css("color", "#000");
         $("#payment-menu").css("color", "#000");
@@ -662,6 +715,8 @@
         $(".delivery-panel").css("display", "block");
         $(".payment-panel").css("display", "none");
         $(".pickup-panel").css("display", "none");
+        $(".order-panel").css("display", "none");
+        $("#orders-menu").css("color", "000");
         $("#delivery-menu").css("color", "#18aebf");
         $("#pickup-menu").css("color", "#000");
         $("#payment-menu").css("color", "#00");
@@ -669,10 +724,22 @@
     function showPayment() {
         $(".delivery-panel").css("display", "none");
         $(".payment-panel").css("display", "block");
+        $(".order-panel").css("display", "none");
         $(".pickup-panel").css("display", "none");
         $("#delivery-menu").css("color", "#000");
         $("#pickup-menu").css("color", "#000");
         $("#payment-menu").css("color", "#18aebf");
+        $("#orders-menu").css("color", "000");
+    }
+    function showOrders() {
+        $(".delivery-panel").css("display", "none");
+        $(".payment-panel").css("display", "none");
+        $(".order-panel").css("display", "block");
+        $(".pickup-panel").css("display", "none");
+        $("#delivery-menu").css("color", "#000");
+        $("#pickup-menu").css("color", "#000");
+        $("#payment-menu").css("color", "#000");
+        $("#orders-menu").css("color", "18aebf");
     }
     function showTime() {
         $(".delivery-times").css("display", "block");
@@ -740,6 +807,71 @@
             error: function (error) {
                 console.log("error")
                 console.log(error)
+            }
+        });
+    }
+    function toggleDelivery(){
+        $.ajax({
+            url: '<c:url value="/${business.businessId}/toggleDelivery"/>',
+            type: "POST",
+            contentType: "application/json",
+            dataType: 'json',
+        });
+    }
+    function togglePickup(){
+        $.ajax({
+            url: '<c:url value="/${business.businessId}/togglePickup"/>',
+            type: "POST",
+            contentType: "application/json",
+            dataType: 'json',
+        });
+    }
+    function updateOrderPrepTime(){
+        $.ajax({
+            url: '<c:url value="/${business.businessId}/updateOrderPrepTime?orderPrepTime="/>'+$('#business-prepearation-time').val(),
+            type: "POST",
+            contentType: "application/json",
+            dataType: 'json',success: function (response, data) {
+                if (response  === "Success") {
+                    $('.alert-container').html(
+                        `<div class="alert-container-success">
+    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time updated</h3>
+</div>`
+                    )
+                    setTimeout(function () {
+                        $('.alert-container').html('')
+                    }, 5000);
+                } else {
+                    $('.alert-container').html(
+                        `<div class="alert-container-error">
+    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time not updated</h3>
+</div>`
+                    )
+                    setTimeout(function () {
+                        $('.alert-container').html('')
+                    }, 5000);
+                }
+            },
+            error: function (error) {
+                if (error  === "Success") {
+                    $('.alert-container').html(
+                        `<div class="alert-container-success">
+    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time updated</h3>
+</div>`
+                    )
+                    setTimeout(function () {
+                        $('.alert-container').html('')
+                    }, 5000);
+                } else {
+                    $('.alert-container').html(
+                        `<div class="alert-container-error">
+    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time not updated</h3>
+</div>`
+                    )
+                    setTimeout(function () {
+                        $('.alert-container').html('')
+                    }, 5000);
+                }
             }
         });
     }

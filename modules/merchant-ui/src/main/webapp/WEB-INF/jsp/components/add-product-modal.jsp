@@ -9,15 +9,15 @@
             <p style="text-align: center">Add Product</p>
             <div class="form-container">
 
-                <div class="tabset">
+                <div class="tabsetp">
                     <!-- Tab 1 -->
-                    <input type="radio" name="tabset" id="tab1" aria-controls="create-basic" checked>
+                    <input type="radio" name="tabsetp" id="tab1" aria-controls="create-basic" checked>
                     <label for="tab1">Basic</label>
                     <!-- Tab 2 -->
-                    <input type="radio" name="tabset" id="tab2" aria-controls="create-addons">
+                    <input type="radio" name="tabsetp" id="tab2" aria-controls="create-addons">
                     <label for="tab2">Addons</label>
                     <!-- Tab 3 -->
-                    <input type="radio" name="tabset" id="tab3" aria-controls="create-variants">
+                    <input type="radio" name="tabsetp" id="tab3" aria-controls="create-variants">
                     <label for="tab3">Variants</label>
 
                     <div class="tab-panels">
@@ -26,18 +26,22 @@
 
                             <div class="register-outer" style="border: none !important;padding: 0px!important;margin-top: 0px">
 
-                                <div class="form-group">
-                                    <label for="prd-price">Product Price</label>
-                                    <input class="form-control" type="text" name="prd-price" id="prd-price">
-                                    <small id="add-prd-price-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter product name.</small>
-                                </div>
-
 
                                 <div class="form-group">
                                     <label for="prd-nam">Product Name</label>
                                     <input class="form-control" type="text" name="prd-nam" id="prd-name">
-                                    <small id="add-prd-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter product price.</small>
+                                    <small id="prd-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter product name.</small>
                                 </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="prd-price">Product Price</label>
+                                    <input class="form-control" type="text" name="prd-price" id="prd-price">
+                                    <small id="prd-price-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter product price.</small>
+                                </div>
+
+
 
                                 <div class="form-group">
                                     <label for="product-desciption">Description</label>
@@ -77,7 +81,7 @@
                                 <div id="prd-null" class="error-message-icons">
                         <span style="font-size: 0.6em; color: #ff647c;">
                         <i class="fal fa-exclamation-circle"></i>
-                        Select a starter screen
+                        Select a product image!
                         </span>
                                 </div>
 

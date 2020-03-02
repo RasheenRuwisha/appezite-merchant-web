@@ -40,6 +40,22 @@
     </div>
 </div>
 
+<div class="alert-container">
+    <c:if test="${removefail ne null}">
+        <div class="alert-container-error" style="display: block">
+            <h3 class="alert-text"><i class="fa fa-check"></i>${removefail}</h3>
+        </div>
+    </c:if>
+
+
+    <c:if test="${removesuccess ne null}">
+        <div class="alert-container-success" style="display: block">
+            <h3 class="alert-text"><i class="fa fa-check"></i>${removesuccess}</h3>
+        </div>
+    </c:if>
+
+</div>
+
 
 
 
@@ -57,30 +73,53 @@
 
             <div class="tabset" style="width: 100%!important;max-width: 100%">
                 <!-- Tab 1 -->
-                <input type="radio" name="main-tab" id="tab11" aria-controls="products" checked>
+                <input type="radio" name="main-tab" id="tab11" aria-controls="products" >
                 <a href="/merchant/${business.businessId}/main">Products</a>
 
                 <!-- Tab 2 -->
-                <input type="radio" name="main-tab" id="tab12" aria-controls="categories">
+                <input type="radio" name="main-tab" id="tab12" aria-controls="categories" checked>
                 <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
                 <!-- Tab 3 -->
                 <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
                 <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
 
-                <input type="radio" name="main-tab" id="tab14" aria-controls="settings">
+                <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
                 <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
 
+                <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
+                <a href="/merchant/${business.businessId}/manageImages">Images</a>
+
                 <button id="add-cat" class="add-btn btn btn-outline-secondary"   data-toggle="modal" data-target="#add-category-modal">Add Category</button>
+
+                <form id="csv-upload" method="post" enctype="multipart/form-data"
+                      action="/merchant/${businessId}/batchUploadCategoryCSV">
+                    <label id="prd-csv1" for="prd-csv-in1" class="prd-image custom-file-upload">
+                        Upload Products via CSV
+                    </label>
+                    <input id="prd-csv-in1" type="file" name="file" accept=".xls,.xlsx" onchange="submitCsvForm()"><br><br>
+                </form>
+
+                <form id="json-upload" method="post" enctype="multipart/form-data"
+                      action="/merchant/${businessId}/batchUploadCategoryJSON">
+
+                    <label id="prd-csv2" for="prd-csv-in2" class="prd-image custom-file-upload">
+                        Upload products via json
+                    </label>
+
+                    <input id="prd-csv-in2" type="file" name="file" accept=".json" onchange="submitJsonForm()"><br><br>
+                </form>
 
                 <div class="tab-panels">
                     <section id="categories" class="tab-panel">
                         <c:forEach items="${categories}" var="category">
-                            <div class="product-card" onclick="initCategoryModal('${category.name}','${category.image}','${category.categoryId}')">
+                            <div class="product-card" >
                                 <div class="product-image">
                                     <img src="<c:url value="${category.image}"/>" alt="logo">
                                 </div>
                                 <div class="product-card-overlay">
                                     <p class="product-name">${category.name}</p>
+                                    <p class="function-p"><span onclick="initCategoryModal('${category.name}','${category.image}','${category.categoryId}')">Edit</span> &nbsp
+                                    <span onclick="initCategoryRemoveModal('${category.name}','<c:url value="/${business.businessId}/removeCategory?email=${business.email}&categoryId=${category.categoryId}"/>')">Remove </span></p>
                                 </div>
                             </div>
                         </c:forEach>
@@ -101,6 +140,7 @@
 
 <jsp:include page="components/add-category-modal.jsp"/>
 <jsp:include page="components/edit-category-modal.jsp"/>
+<jsp:include page="components/remove-category-modal.jsp"/>
 
     </body>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/tab-controls.css"/>">

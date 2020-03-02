@@ -2,6 +2,7 @@ package io.appy.domain;
 
 public class BusinessDetails {
 
+    String businessId;
     String name;
     String email;
     String country;
@@ -12,13 +13,22 @@ public class BusinessDetails {
     public BusinessDetails() {
     }
 
-    public BusinessDetails(String name, String email, String country, String password, String phone, String countryCode) {
+    public BusinessDetails(String businessId, String name, String email, String country, String password, String phone, String countryCode) {
+        this.businessId = businessId;
         this.name = name;
         this.email = email;
         this.country = country;
         this.password = password;
         this.phone = phone;
         this.countryCode = countryCode;
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 
     public String getName() {

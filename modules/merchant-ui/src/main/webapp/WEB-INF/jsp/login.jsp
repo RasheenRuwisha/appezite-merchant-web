@@ -29,7 +29,7 @@
 
 <div class="register-form">
     <div class="form-container">
-        <form id="login-form" action='<c:url value='j_spring_security_check' />' method='POST' enctype="application/json">
+        <form id="login-form" action='<c:url value='j_spring_security_check'/>' method='POST' enctype="application/json">
 
             <div class="register-outer" style="position: absolute;
 top: 10%;
@@ -43,8 +43,12 @@ transform: translate(-50%,-10%);">
                     <img src="<c:url value="/resources/images/logo2.png"/>" alt="logo">
                 </div>
 
-                <h3>Sign in </h3>
-                <h5>continue to Appezite</h5>
+                <div style="
+            text-align: center;">
+                    <h3>Sign in </h3>
+                    <h5>continue to Appezite</h5>
+                </div>
+
                 <div class="form-group">
                     <label>Email</label>
                     <input class="form-control" type="email" name="username" id="business-email">

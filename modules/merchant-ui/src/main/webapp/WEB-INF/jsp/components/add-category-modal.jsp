@@ -9,14 +9,14 @@
 
         </div>
         <div class="form-container">
-            <form:form enctype="application/json" action='/merchant/${business.businessId}/addCategory?email=${business.email}' method="post">
+            <form:form enctype="application/json" id="add-category-form" action='/merchant/${business.businessId}/addCategory?email=${business.email}' method="post">
 
 
             <div class="register-outer" style="border: none !important;">
 
                 <div class="form-group">
                     <label for="prd-nam">Category Name</label>
-                    <input class="form-control" type="text" name="cate-name"  id="cat-name">
+                    <input class="form-control" type="text" name="name"  id="cat-name">
                     <small id="cat-name-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i> Enter category name.</small>
                 </div>
 

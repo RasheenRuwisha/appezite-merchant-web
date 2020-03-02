@@ -19,7 +19,6 @@
         <sec:intercept-url pattern="/images/**" access="isAnonymous()" />
         <sec:intercept-url pattern="/css/**" access="isAnonymous()" />
         <sec:intercept-url pattern="/javascript/**" access="isAnonymous()" />
-        <sec:intercept-url pattern="/**/appconfig" access="hasRole('ROLE_ADMIN')" />
 
         <sec:form-login login-page="/login" authentication-failure-url="/login"
                         username-parameter="username"
