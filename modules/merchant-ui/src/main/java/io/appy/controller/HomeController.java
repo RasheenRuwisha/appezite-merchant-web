@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -367,6 +368,11 @@ public class HomeController {
         BusinessFullDetails businessFullDetails = businessApiClient.getBusinessDetails(businessId);
         String email = UserDetailService.getUserId(authentication);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Category> linkedCategories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> existingCategories = objectMapper.convertValue(linkedCategories, new TypeReference<List<Category>>() { });
+
+
         String fileLocation;
         InputStream in = file.getInputStream();
         List<Product> products = new ArrayList<>();
@@ -411,7 +417,7 @@ public class HomeController {
                                 Cell imageCell = cellIterator.next();
                                 String[] categoryNames  = currentCell.getStringCellValue().split(",");
                                 for(String catName : categoryNames){
-                                    Category category = getCategory(businessFullDetails,businessId,catName,newCategories,isNew,imageCell.getStringCellValue(),email);
+                                    Category category = getCategory(businessFullDetails,businessId,catName,newCategories,isNew,imageCell.getStringCellValue(),email,existingCategories);
                                     images.add(imageCell.getStringCellValue());
                                     categories.add(category.getCategoryId());
                                     product.setCategoryId(categories);
@@ -419,7 +425,7 @@ public class HomeController {
                             }else {
                                 String catName = currentCell.getStringCellValue();
                                 currentCell = cellIterator.next();
-                                Category category = getCategory(businessFullDetails, businessId, catName, newCategories, isNew, currentCell.getStringCellValue(),email);
+                                Category category = getCategory(businessFullDetails, businessId, catName, newCategories, isNew, currentCell.getStringCellValue(),email,existingCategories);
                                 images.add(currentCell.getStringCellValue());
                                 categories.add(category.getCategoryId());
                                 product.setCategoryId(categories);
@@ -456,7 +462,12 @@ public class HomeController {
 
 
         BusinessFullDetails businessFullDetails = businessApiClient.getBusinessDetails(businessId);
+
         ObjectMapper objectMapper = new ObjectMapper();
+        List<Category> linkedCategories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> existingCategories = objectMapper.convertValue(linkedCategories, new TypeReference<List<Category>>() { });
+
+
         InputStream in = file.getInputStream();
         boolean isNew = true;
 
@@ -473,7 +484,7 @@ public class HomeController {
                 List<String> categories = new ArrayList<>();
                 images.add(product1.getImage());
                 for(JsonCategories categorie : product.getCategories()){
-                    Category category = getCategory(businessFullDetails,businessId,categorie.getName(),newCategories,isNew,categorie.getImage(),email);
+                    Category category = getCategory(businessFullDetails,businessId,categorie.getName(),newCategories,isNew,categorie.getImage(),email,existingCategories);
                     categories.add(category.getCategoryId());
                     product1.setCategoryId(categories);
                     images.add(categorie.getImage());
@@ -497,8 +508,10 @@ public class HomeController {
     public String uploadCategoryCSV(Authentication authentication,@PathVariable String businessId,@RequestParam("file")  MultipartFile file) throws IOException {
         String email = UserDetailService.getUserId(authentication);
 
+        ObjectMapper objectMapper = new ObjectMapper();
         BusinessFullDetails businessFullDetails = businessApiClient.getBusinessDetails(businessId);
-        List<Category> categories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> linkedCategories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> categories = objectMapper.convertValue(linkedCategories, new TypeReference<List<Category>>() { });
 
         String fileLocation;
         InputStream in = file.getInputStream();
@@ -563,7 +576,9 @@ public class HomeController {
         BusinessFullDetails businessFullDetails = businessApiClient.getBusinessDetails(businessId);
         ObjectMapper objectMapper = new ObjectMapper();
         InputStream in = file.getInputStream();
-        List<Category> categories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> linkedCategories = businessApiClient.getBusinessCategories(email,businessId);
+        List<Category> categories = objectMapper.convertValue(linkedCategories, new TypeReference<List<Category>>() { });
+
         boolean isNew = true;
         List<String> images = new ArrayList<>();
         if(businessFullDetails.getImages() != null){
@@ -576,7 +591,7 @@ public class HomeController {
             for(CategoryJson categoryJson: categoryJsonList){
                 Category category = new Category();
                 images.add(category.getImage());
-                category = getCategory(businessFullDetails,businessId,categoryJson.getName(),newCategories,isNew,categoryJson.getImage(),email);
+                category = getCategory(businessFullDetails,businessId,categoryJson.getName(),newCategories,isNew,categoryJson.getImage(),email,categories);
                 if(findDuplicateCategories(businessFullDetails,businessId,categories, categoryJson.getName())){
                     newCategories.add(category);
                 }
@@ -600,8 +615,13 @@ public class HomeController {
         return true;
     }
 
-    public Category getCategory(BusinessFullDetails businessFullDetails, String businessId, String catName, List<Category> newCategories, boolean isNew,String image, String email ){
-        Category category = businessApiClient.getCategoryByName(email, businessId,catName);
+    public Category getCategory(BusinessFullDetails businessFullDetails, String businessId, String catName, List<Category> newCategories, boolean isNew,String image, String email,List<Category> categories ){
+        Category category = new Category();
+        List<Category> existingList = categories.stream().filter(u -> u.getName().equals(catName)).collect(Collectors.toList());
+        if(existingList.size() > 0){
+            category = existingList.get(0);
+        }
+
         if(category.getCategoryId() == null){
             for(Category category1 : newCategories){
                 if(category1.getName().equals(catName)){
