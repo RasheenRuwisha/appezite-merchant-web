@@ -25,6 +25,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput-jquery.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
+
 </head>
 <body>
 
@@ -77,7 +86,7 @@
                                 </div>
                                 <div class="product-card-overlay">
                                     <p class="product-name">${prdocut.name}</p>
-                                    <p class="function-p"><span data-toggle="modal" data-target="#${prdocut.productId}">Edit</span> &nbsp; <span onclick="removeProduct('<c:url value="/${business.businessId}/removeProduct?email=${business.email}&productId=${prdocut.productId}"/>')">Remove </span></p>
+                                    <p class="function-p"><span data-toggle="modal" data-target="#${prdocut.productId}">Edit</span> &nbsp; <span onclick="removeProduct('<c:url value="/${business.businessId}/removeProduct&productId=${prdocut.productId}"/>')">Remove </span></p>
                                 </div>
                             </div>
                         </c:if>
@@ -192,7 +201,7 @@
 
 
                                             <div class="form-button">
-                                                <button id="${prdocut.productId}-submit-prd-btn"   class="btn btn-outline-secondary" onclick="updateProduct('<c:url value="/${business.businessId}/updateProduct?email=${business.email}"/>','${prdocut.productId}')">Update</button>
+                                                <button id="${prdocut.productId}-submit-prd-btn"   class="btn btn-outline-secondary" onclick="updateProduct('<c:url value="/${business.businessId}/updateProduct"/>','${prdocut.productId}')">Update</button>
                                             </div>
 
                                         </div>
@@ -421,4 +430,6 @@
 
     });
 </script>
+<script src="<c:url value="/resources/javascript/firebase.js"/>"></script>
+
 </html>

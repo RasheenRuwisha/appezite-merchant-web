@@ -1,12 +1,14 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: rasheenruwisha
-  Date: 12/13/19
-  Time: 17:10
+  Date: 4/10/20
+  Time: 22:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Appezite</title>
@@ -77,60 +79,77 @@
 
 <div class="content-container" id="product-container">
 
-            <div class="tabset" style="width: 100%!important;max-width: 100%">
-                <!-- Tab 1 -->
-                <input type="radio" name="main-tab" id="tab11" aria-controls="products" >
-                <a href="/merchant/${business.businessId}/manageProducts">Products</a>
+    <div class="tabset" style="width: 100%!important;max-width: 100%">
+        <!-- Tab 1 -->
+        <input type="radio" name="main-tab" id="tab11" aria-controls="products" >
+        <a href="/merchant/${business.businessId}/manageProducts">Products</a>
 
-                <!-- Tab 2 -->
-                <input type="radio" name="main-tab" id="tab12" aria-controls="categories" >
-                <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
-                <!-- Tab 3 -->
-                <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
-                <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
+        <!-- Tab 2 -->
+        <input type="radio" name="main-tab" id="tab12" aria-controls="categories" >
+        <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
+        <!-- Tab 3 -->
+        <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
+        <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
 
-                <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
-                <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
+        <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
+        <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
 
-                <input type="radio" name="main-tab" id="tab15" aria-controls="images" checked>
-                <a href="/merchant/${business.businessId}/manageImages">Images</a>
+        <input type="radio" name="main-tab" id="tab15" aria-controls="images">
+        <a href="/merchant/${business.businessId}/manageImages">Images</a>
 
-                <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
-                <a href="/merchant/${business.businessId}/appconfig?page='appconfig'">App Setting</a>
+        <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
+        <a href="/merchant/${business.businessId}/appconfig?page='appconfig'">App Setting</a>
 
-                <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
-                <a href="/merchant/${business.businessId}/manageNotifications">Notifications</a>
+        <input type="radio" name="main-tab" id="tab15" aria-controls="app" checked>
+        <a href="/merchant/${business.businessId}/manageNotifications">Notifications</a>
 
-                <div id="business-image"  class="add-btn btn btn-outline-secondary">
-                   <label for="business-file">Add Image</label>
-                </div>
-                <form id="image-form" action="/merchant/${business.businessId}/uploadImage" method="post">
+        <div class="row" style="padding-top: 20px">
+            <div class="col-md-4 notification-form">
+                <form:form modelAttribute="notification" enctype="application/json"  id="appconfig-form" action="/merchant/${business.businessId}/sendNotification" method="post">
 
-                    <input id="business-file" type="file" name="myFile" accept="image/*" onchange="updloadNewBusinessImage(this);"><br><br>
-                    <input style="display: none" type="text" name="url" id="business-image-url" onchange="submitImage()">
+                    <div class="form-group" style="padding-top: 20px">
+                        <label for="notitifcation-title">Title</label>
+                        <form:input class="form-control" type="text" path="title" id="notitifcation-title"/>
+                        <small id="title-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter title</small>
+                    </div>
 
-                </form>
+                    <div class="form-group">
+                        <label for="notitifcation-msg">Message</label>
+                        <form:input class="form-control" type="text" path="body" id="notitifcation-msg"/>
+                        <small id="msg-null" class="form-text text-muted error-message" style="font-size: 0.6em;color: #ff647c !important;display: none;"><i class="fal fa-exclamation-circle"></i>  Enter Message</small>
+                    </div>
+
+                    <div class="form-button">
+                        <button  type="submit"
+                                 class="btn btn-outline-secondary"> <span id="submit-btn">Submit</span>  <i class="fal fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </form:form>
+            </div>
 
 
-
+            <div  class="col-md-8">
                 <table >
                     <tr>
-                        <th>Image</th>
-                        <th>URL</th>
+                        <th>Title</th>
+                        <th>Body</th>
+                        <th>Date</th>
                     </tr>
-                    <c:forEach items="${business.images}" var="image">
+                    <c:forEach  items="${business.notifications}" var="businessNotifications">
                         <tr>
-                            <td>
-                                <img style="width: 200px; height: 100px" src="${image}">
-                            </td>
-                            <td>
-                                <p>${image}</p>
-                            </td>
+                            <td>${businessNotifications.title}</td>
+                            <td>${businessNotifications.body}</td>
+                            <td>${businessNotifications.dateTime}</td>
                         </tr>
                     </c:forEach>
                 </table>
-
             </div>
+
+        </div>
+
+
+
+    </div>
 
 
 

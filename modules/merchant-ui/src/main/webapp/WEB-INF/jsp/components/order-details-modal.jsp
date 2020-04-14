@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="order-id">Modal title</h5>
+                <h5 class="modal-title" id="order-id">Order Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,6 +18,7 @@
                     </div>
                 </div>
 
+                    <div id="order-details-container" style="display: none">
                 <div class="row">
                     <div class="col-md-5 col-md-offset-1 col-xs-6 header-parameters">
                         Order Id
@@ -69,9 +70,9 @@
                     </div>
 
 
-                    <div class="po-items" id="purchase-order-item-list-area">
+                    <div class="po-items" id="purchase-order-item-list-area" >
                         <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
+                            <div class="col-md-10 col-md-offset-1" style="max-height: 550px;overflow: scroll">
                                 <div class="row header-row">
                                     <div class="col-md-5 col-xs-5 paddingless-col">
                                         Item
@@ -98,7 +99,7 @@
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
 
-                                <div class="row footer-row">
+                                <div>
                                     <div class=" row item-row ">
                                         <div class="col-md-6 col-xs-6 paddingless-col ">
                                            Subtotal
@@ -142,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                     </div>
                 </div>
                 </div>

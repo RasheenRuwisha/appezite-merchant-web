@@ -118,7 +118,7 @@ function updateLogo(input){
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -169,7 +169,7 @@ function updateStarterScreen(input){
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -215,7 +215,7 @@ function updateBackground(input){
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -262,7 +262,7 @@ function updateIcon(input){
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -294,6 +294,7 @@ function updateIcon(input){
 document.getElementById( 'appconfig-form' ).addEventListener('submit', function(e) {
     if(!validateFields()) {
         e.preventDefault();
+        $("#app-batch-overlay").removeClass("batch-overlay-visible");
     }
 });
 

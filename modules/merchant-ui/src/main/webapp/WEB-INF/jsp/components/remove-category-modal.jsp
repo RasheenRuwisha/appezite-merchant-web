@@ -13,16 +13,28 @@
         <!-- Modal content -->
         <div class="modal-content">
             <div class="form-container">
-                    <div class="register-outer" style="border: none !important;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div  style="border: none !important;">
                         <form id="remove-category-form" method="post">
 
-                        <p>Are you sure you want to remove <span id="remove-category-name"> </span></p>
-                        <div class="form-button">
-                            <button id="remove-cat-submit" type="submit" class="btn btn-outline-secondary">Remove</button>
-                        </div>
+                            <p>Are you sure you want to remove <span id="remove-category-name"> </span></p>
                         </form>
                     </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="submit" form="remove-category-form" class="btn btn-primary">Remove</button>
+                </div>
             </div>
+
 
             <div id="add-category-modal-overlay-disable" class="modal-content disable-overlay">
             </div>

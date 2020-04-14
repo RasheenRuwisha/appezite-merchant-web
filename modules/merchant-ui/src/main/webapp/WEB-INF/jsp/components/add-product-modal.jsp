@@ -188,8 +188,11 @@
                                 </button>
                             </div>
                         </section>
-                        <div class="form-button">
-                            <button id="submit-prd-btn"   class="btn btn-primary add-btn" onclick="createProduct('<c:url value="/${business.businessId}/addProduct?email=${business.email}"/>','${businessId}')">Add</button>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="submit-prd-btn"   class="btn btn-primary" onclick="createProduct('<c:url value="/${business.businessId}/addProduct"/>','${businessId}')">Add</button>
+
                         </div>
                     </div>
 

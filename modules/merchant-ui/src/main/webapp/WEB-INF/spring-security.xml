@@ -12,20 +12,27 @@
        http://www.springframework.org/schema/util/spring-util.xsd">
 
     <sec:http auto-config="true" use-expressions="true">
-        <sec:intercept-url pattern="/login" access="isAnonymous()" />
-        <sec:intercept-url pattern="/register" access="isAnonymous()" />
-        <sec:intercept-url pattern="/logout" access="isAnonymous()" />
-        <sec:intercept-url pattern="/access_denied" access="isAnonymous()" />
-        <sec:intercept-url pattern="/images/**" access="isAnonymous()" />
-        <sec:intercept-url pattern="/css/**" access="isAnonymous()" />
-        <sec:intercept-url pattern="/javascript/**" access="isAnonymous()" />
+
+        <sec:intercept-url pattern="/login" access="permitAll()" />
+        <sec:intercept-url pattern="/register" access="permitAll()" />
+        <sec:intercept-url pattern="/logout" access="permitAll()" />
+        <sec:intercept-url pattern="/access_denied" access="permitAll()" />
+        <sec:intercept-url pattern="/images/**" access="permitAll()" />
+        <sec:intercept-url pattern="/css/**" access="permitAll()" />
+        <sec:intercept-url pattern="/javascript/**" access="permitAll()" />
+        <sec:intercept-url pattern="/**/appconfig" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**/manageProducts" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**/manageCategories" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**/manageSettings" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**/manageOrders" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**/manageNotifications" access="hasRole('ROLE_ADMIN')" />
 
         <sec:form-login login-page="/login" authentication-failure-url="/login"
                         username-parameter="username"
                         password-parameter="password"
                         authentication-success-handler-ref="successHandler"/>
 
-        <sec:logout logout-success-url="/logout"/>
+        <sec:logout logout-success-url="/login" delete-cookies="JSESSIONID" invalidate-session="true"/>
 
     </sec:http>
 
@@ -40,6 +47,7 @@
     <bean class="io.appy.util.CustomAuthenticationProvider" id="authenticationProvider"/>
 
     <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+
 
     <bean id="successHandler" class="io.appy.util.CustomSuccessHandler"></bean>
 

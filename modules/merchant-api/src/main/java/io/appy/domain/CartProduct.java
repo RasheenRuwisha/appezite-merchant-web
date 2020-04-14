@@ -7,16 +7,16 @@ public class CartProduct {
     String name;
     String image;
     int quantity;
-    int price;
+    Double price;
     String variant;
-    int variantPrice;
+    Double variantPrice;
     List<CartAddons> addons;
 
 
     public CartProduct() {
     }
 
-    public CartProduct(String name, String image, int quantity, int price, String variant, int variantPrice, List<CartAddons> addons) {
+    public CartProduct(String name, String image, int quantity, Double price, String variant, Double variantPrice, List<CartAddons> addons) {
         this.name = name;
         this.image = image;
         this.quantity = quantity;
@@ -50,11 +50,11 @@ public class CartProduct {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -66,11 +66,11 @@ public class CartProduct {
         this.variant = variant;
     }
 
-    public int getVariantPrice() {
+    public Double getVariantPrice() {
         return variantPrice;
     }
 
-    public void setVariantPrice(int variantPrice) {
+    public void setVariantPrice(Double variantPrice) {
         this.variantPrice = variantPrice;
     }
 

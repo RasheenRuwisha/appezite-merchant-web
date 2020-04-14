@@ -9,7 +9,7 @@ public class ProductJson {
     List<JsonCategories> categories;
     String image;
     Boolean visibility;
-    int price;
+    Double price;
     VariantGroup variant;
     List<AddonGroup> addons;
     String description;
@@ -20,7 +20,7 @@ public class ProductJson {
     public ProductJson() {
     }
 
-    public ProductJson(String productId, String name, List<JsonCategories> categories, String image, Boolean visibility, int price, VariantGroup variant, List<AddonGroup> addons, String description, String businessId, String docType) {
+    public ProductJson(String productId, String name, List<JsonCategories> categories, String image, Boolean visibility, Double price, VariantGroup variant, List<AddonGroup> addons, String description, String businessId, String docType) {
         this.productId = productId;
         this.name = name;
         this.categories = categories;
@@ -74,11 +74,11 @@ public class ProductJson {
         this.visibility = visibility;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

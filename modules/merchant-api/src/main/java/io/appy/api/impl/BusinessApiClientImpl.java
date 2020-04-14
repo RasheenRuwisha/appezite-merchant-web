@@ -345,4 +345,20 @@ public class BusinessApiClientImpl implements BusinessApiClient {
         return response;
     }
 
+    @Override
+    public BusinessFullDetails sendNotification(NotificationAPIRequest notificationAPIRequest, String email) {
+        UriBuilder builder = UriBuilder
+                .fromPath(merchantApiBaseUrl)
+                .path("/sendNotifications");
+        URI uri = builder.build();
+        BusinessFullDetails response = new BusinessFullDetails();
+        try{
+            WebTarget webResource = client.target(uri);
+            response =  webResource.request(MediaType.APPLICATION_JSON).header("x-merchant-id",email).post(Entity.entity(notificationAPIRequest, MediaType.APPLICATION_JSON), BusinessFullDetails.class);
+        }catch (Exception ex){
+
+        }
+        return response;
+    }
+
 }

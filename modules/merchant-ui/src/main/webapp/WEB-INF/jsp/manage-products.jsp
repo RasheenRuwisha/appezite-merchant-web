@@ -26,17 +26,44 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
+
 </head>
 <body>
+<div class="batch-overlay" id="product-batch-overlay">
+    <div class="processing-container">
+        <i class="fa fa-spinner fa-spin fa-2x" style="color: white;"></i>
+        <span style="color: white">Uploading Products</span>
+    </div>
+</div>
 
 <div class="nav">
     <div class="nav-container">
-        <div class="nav-logo">
+        <div class="nav-logo" style="margin-top: 11px">
             Appezite
         </div>
-        <div class="nav-user">
-            ${business.email}
+
+        <div class="nav-user" style="text-align:  center">
+            <a href='<c:url value='/j_spring_security_logout'/>'><i class="fad fa-sign-out"></i><span style="font-size: 11px"><br>Logout</span></a>
         </div>
+
+        <c:if test="${business.apkUrl ne null}">
+            <div class="nav-user" style="text-align:  center">
+                <a href='${business.apkUrl}'><i class="far fa-mobile-android-alt"></i><span style="font-size: 11px"><br>Download APK</span></a>
+            </div>
+        </c:if>
+
+        <div class="nav-user">
+            <p>${business.email}</p>
+        </div>
+
     </div>
 </div>
 
@@ -51,53 +78,6 @@
                 <p>No Products available.</p>
                 <p>Lets add some!</p>
                 <button data-toggle="modal" data-target="#add-product-modal" class="btn btn-outline-secondary" id="myBtn">Add Product</button>
-
-                <form method="post" enctype="multipart/form-data"
-                      action="/merchant/${businessId}/batchUploadProductCSV">
-
-                    <label id="prd-csv" for="prd-csv-in" class="prd-image custom-file-upload">
-                        Choose Image
-                    </label>
-
-                    <input id="prd-csv-in" type="file" name="file" accept=".xls,.xlsx"><br><br>
-                    <input type="submit" value="Upload file" />
-                </form>
-            </div>
-        </c:when>
-        <c:otherwise>
-
-            <div class="tabset" style="width: 100%!important;max-width: 100%">
-                <!-- Tab 1 -->
-                <input type="radio" name="main-tab" id="tab11" aria-controls="products" checked>
-                <a href="/merchant/${business.businessId}/main">Products</a>
-
-                <!-- Tab 2 -->
-                <input type="radio" name="main-tab" id="tab12" aria-controls="categories">
-                <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
-                <!-- Tab 3 -->
-                <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
-                <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
-
-                <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
-                <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
-
-
-                <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
-                <a href="/merchant/${business.businessId}/manageImages">Images</a>
-
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#add-product-modal">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-
-                <button id="add-prd" class="add-btn btn btn-outline-secondary"  >Add Product</button>
 
                 <form id="csv-upload" method="post" enctype="multipart/form-data"
                       action="/merchant/${businessId}/batchUploadProductCSV">
@@ -117,6 +97,69 @@
 
                     <input id="prd-csv-in2" type="file" name="file" accept=".json" onchange="submitJsonForm()"><br><br>
                 </form>
+            </div>
+        </c:when>
+        <c:otherwise>
+
+            <div class="tabset" style="width: 100%!important;max-width: 100%">
+                <!-- Tab 1 -->
+                <input type="radio" name="main-tab" id="tab11" aria-controls="products" checked>
+                <a href="/merchant/${business.businessId}/manageProducts">Products</a>
+
+                <!-- Tab 2 -->
+                <input type="radio" name="main-tab" id="tab12" aria-controls="categories">
+                <a href="/merchant/${business.businessId}/manageCategories">Categories</a>
+                <!-- Tab 3 -->
+                <input type="radio" name="main-tab" id="tab13" aria-controls="settings">
+                <a href="/merchant/${business.businessId}/manageSettings">Settings</a>
+
+                <input type="radio" name="main-tab" id="tab14" aria-controls="orders">
+                <a href="/merchant/${business.businessId}/manageOrders">Orders</a>
+
+
+                <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
+                <a href="/merchant/${business.businessId}/manageImages">Images</a>
+
+                <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
+                <a href="/merchant/${business.businessId}/appconfig?page='appconfig'">App Setting</a>
+
+                <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
+                <a href="/merchant/${business.businessId}/manageNotifications">Notifications</a>
+
+
+                <div class="add-btn btn btn-outline-secondary" style="border: none">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Add Product
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#add-product-modal">Add Product</a>
+
+                        <form style="height: 35px; margin: 0px !important;" id="csv-upload" method="post" enctype="multipart/form-data"
+                              action="/merchant/${businessId}/batchUploadProductCSV">
+                            <label class="dropdown-item" id="prd-csv1" for="prd-csv-in1">
+                                Upload Products via CSV
+                            </label>
+                            <input id="prd-csv-in1" type="file" name="file" accept=".xls,.xlsx" onchange="submitCsvForm()"><br><br>
+                        </form>
+
+
+                        <form style="height: 35px; margin: 0px !important;" id="json-upload" method="post" enctype="multipart/form-data"
+                              action="/merchant/${businessId}/batchUploadProductJSON">
+
+                            <label id="prd-csv2" for="prd-csv-in2" class="dropdown-item">
+                                Upload products via json
+                            </label>
+
+                            <input id="prd-csv-in2" type="file" name="file" accept=".json" onchange="submitJsonForm()"><br><br>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+
 
                 <div class="tab-panels">
                     <section id="products" class="tab-panel">
@@ -130,7 +173,7 @@
                                     <div class="product-card-overlay">
                                         <p class="product-name">${prdocut.name}</p>
                                         <p class="function-p"><span data-toggle="modal" data-target="#${prdocut.productId}">Edit</span> &nbsp;
-                                            <span onclick="initProductRemoveModal('${prdocut.name}','<c:url value="/${business.businessId}/removeProduct?email=${business.email}&productId=${prdocut.productId}"/>')">Remove </span></p>
+                                            <span onclick="initProductRemoveModal('${prdocut.name}','<c:url value="/${business.businessId}/removeProduct?productId=${prdocut.productId}"/>')">Remove </span></p>
                                     </div>
                                 </div>
                             </c:if>
@@ -431,8 +474,11 @@
                                     </div>
                                 </section>
                             </div>
-                            <div class="form-button">
-                                <button id="${prdocut.productId}-submit-prd-btn"   class="btn btn-primary add-btn" onclick="updateProduct('<c:url value="/${business.businessId}/updateProduct?email=${business.email}"/>','${prdocut.productId}','${businessId}')">Update</button>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button id="${prdocut.productId}-submit-prd-btn"   class="btn btn-primary" onclick="updateProduct('<c:url value="/${business.businessId}/updateProduct"/>','${prdocut.productId}','${businessId}')">Update</button>
+
                             </div>
                         </div>
 
@@ -457,6 +503,65 @@
 <script src="<c:url value="/resources/javascript/modal.js"/>"></script>
 <script src="<c:url value="/resources/javascript/product.js"/>"></script>
 <script src="<c:url value="/resources/javascript/category.js"/>"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyCjtrgCKde_sTEN-I_7z9Rp8oUhKRNT-cc",
+        authDomain: "notifications-13351.firebaseapp.com",
+        databaseURL: "https://notifications-13351.firebaseio.com",
+        projectId: "notifications-13351",
+        storageBucket: "notifications-13351.appspot.com",
+        messagingSenderId: "581287295658",
+        appId: "1:581287295658:web:7c5fd724f5e10e006a6ed3",
+        measurementId: "G-11CEV0GFYZ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const messaging = firebase.messaging()
+    navigator.serviceWorker.register('/merchant/resources/javascript/firebase-messaging-sw.js')
+        .then((registration) => {
+            messaging.useServiceWorker(registration);
+            messaging
+                .requestPermission()
+                .then(function () {
+                    console.log(messaging.getToken());
+                    return messaging.getToken();
+                })
+                .then(function (token) {
+                    $.ajax({
+                        url: '<c:url value="/${business.businessId}/addNotificationToken?token="/>'+token,
+                        type: "POST",
+                        contentType: "application/json",
+                        dataType: 'json'
+                    });
+                    console.log(token);
+                })
+                .catch(function (err) {
+                    console.log("no permission");
+                    1
+                });
+
+            messaging.onTokenRefresh(() => {
+                messaging
+                    .getToken()
+                    .then((refreshedToken) => {
+                        $.ajax({
+                            url: '<c:url value="/${business.businessId}/addNotificationToken?token="/>'+refreshedToken,
+                            type: "POST",
+                            contentType: "application/json",
+                            dataType: 'json'
+                        });
+                        console.log('Token refreshed.');
+                    })
+                    .catch((err) => {
+                        console.log('Unable to retrieve refreshed token ', err);
+                        showToken('Unable to retrieve refreshed token ', err);
+                    });
+            });
+        });
+
+
+</script>
 
 
 </html>

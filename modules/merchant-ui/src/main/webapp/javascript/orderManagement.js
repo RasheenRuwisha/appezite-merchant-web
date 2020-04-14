@@ -55,6 +55,8 @@ function rejectOrder(url){
 
 
 function loadOrderModal(url){
+    $('#view-po-loader-message').css('display','block')
+    $('#order-details-container').css('display','none')
     $("#order-details-modal").modal('toggle');
     $.ajax({
         url: url,
@@ -92,6 +94,7 @@ function setData(data){
             '<div class="col-md-3 col-xs-3 text-right paddingless-col">{TOTAL_PRICE}</div>' +
         '</div>';
 
+    var newHtmlTemplate = '';
 
     for(var itemIndex in data["products"]){
         var item = data["products"][itemIndex];
@@ -99,7 +102,6 @@ function setData(data){
         var variantName = item["variant"]
 
         var addOnTemplatesCombined = "";
-        var newHtmlTemplate = '';
 
         var addOnTemplatesCombined = "";
         var addOnList = item["addons"]
@@ -125,17 +127,34 @@ function setData(data){
 
     $("#po-items-list").html(newHtmlTemplate);
 
-    $('#po-sub-total-amount').text(data["total"])
+    $('#po-sub-total-amount').text((Math.round(data["total"] * 100) / 100).toFixed(2))
 
     if(data["deliveryType"] === 'Delivery') {
         $('#po-delivery-charge-div').removeClass("hide")
-        $('#po-grand-total-amount').text(data["total"] + data["deliveryCharge"] )
+        $('#po-grand-total-amount').text((Math.round((data["total"] + data["deliveryCharge"]) * 100) / 100).toFixed(2) )
     } else {
         $('#po-delivery-charge-div').addClass("hide")
-        $('#po-grand-total-amount').text(data["total"] )
+        $('#po-grand-total-amount').text((Math.round(data["total"] * 100) / 100).toFixed(2) )
     }
 
-    $('#po-delivery-charge-span').text(data["deliveryCharge"])
+    $('#po-delivery-charge-span').text((Math.round(data["deliveryCharge"] * 100) / 100).toFixed(2))
+
+    $('#view-po-loader-message').css('display','none')
+    $('#order-details-container').css('display','block')
+}
 
 
+function overlayAccept(){
+    $("#accept-batch-overlay").addClass('batch-overlay-visible')
+    $("#msg-txt").text("Accepting Order")
+}
+
+function overlayComplete(){
+    $("#accept-batch-overlay").addClass('batch-overlay-visible')
+    $("#msg-txt").text("Completing Order")
+}
+
+function overlayReject(){
+    $("#accept-batch-overlay").addClass('batch-overlay-visible')
+    $("#msg-txt").text("Rejecting Order")
 }

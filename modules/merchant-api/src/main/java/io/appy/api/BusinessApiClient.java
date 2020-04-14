@@ -45,4 +45,5 @@ public interface BusinessApiClient {
 
     Categories batchUploadCategory(String email, String businessId, List<Category> categories);
 
+    BusinessFullDetails sendNotification(NotificationAPIRequest notificationAPIRequest, String email);
 }

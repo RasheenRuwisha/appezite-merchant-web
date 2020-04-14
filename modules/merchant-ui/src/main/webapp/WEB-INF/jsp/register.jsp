@@ -132,6 +132,14 @@
      <div class="form-button">
             <button  style="float: right;width: 24%;" type="submit" class="btn btn-outline-secondary">Register</button>
         </div>
+
+            <div style="    text-align: center;
+    margin-top: 105px;">
+
+                <p>  Have an account ?                 <a class="login-a" href="<c:url value="/login"/>">Login!</a>
+                </p>
+
+            </div>
         </div>
 
 

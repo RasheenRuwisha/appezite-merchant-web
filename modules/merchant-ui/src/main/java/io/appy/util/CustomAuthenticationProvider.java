@@ -37,7 +37,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 
 
-    BusinessApiClientImpl businessApiClient = new BusinessApiClientImpl("http://localhost:8081/");
+    BusinessApiClientImpl businessApiClient = new BusinessApiClientImpl("http://localhost:5005/merchant/");
 
     private static final Logger logger = LogManager.getLogger(CustomAuthenticationProvider.class.getName());
 

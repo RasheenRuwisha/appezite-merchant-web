@@ -30,18 +30,39 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
+
 </head>
 <body>
 
 
 <div class="nav">
     <div class="nav-container">
-        <div class="nav-logo">
+        <div class="nav-logo" style="margin-top: 11px">
             Appezite
         </div>
-        <div class="nav-user">
-            ${business.email}
+
+        <div class="nav-user" style="text-align:  center">
+            <a href='<c:url value='/j_spring_security_logout'/>'><i class="fad fa-sign-out"></i><span style="font-size: 11px"><br>Logout</span></a>
         </div>
+
+        <c:if test="${business.apkUrl ne null}">
+            <div class="nav-user" style="text-align:  center">
+                <a href='${business.apkUrl}'><i class="far fa-mobile-android-alt"></i><span style="font-size: 11px"><br>Download APK</span></a>
+            </div>
+        </c:if>
+
+        <div class="nav-user">
+            <p>${business.email}</p>
+        </div>
+
     </div>
 </div>
 <div class="alert-container">
@@ -55,7 +76,7 @@
     <div class="tabset" style="width: 100%!important;max-width: 100%">
         <!-- Tab 1 -->
         <input type="radio" name="main-tab" id="tab11" aria-controls="products" >
-        <a href="/merchant/${business.businessId}/main">Products</a>
+        <a href="/merchant/${business.businessId}/manageProducts">Products</a>
 
         <!-- Tab 2 -->
         <input type="radio" name="main-tab" id="tab12" aria-controls="categories">
@@ -70,6 +91,11 @@
         <input type="radio" name="main-tab" id="tab15" aria-controls="images" >
         <a href="/merchant/${business.businessId}/manageImages">Images</a>
 
+        <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
+        <a href="/merchant/${business.businessId}/appconfig?page='appconfig'">App Setting</a>
+
+        <input type="radio" name="main-tab" id="tab15" aria-controls="app" >
+        <a href="/merchant/${business.businessId}/manageNotifications">Notifications</a>
 
         <div class="tab-panels">
             <section id="settings" class="tab-panel">
@@ -271,7 +297,7 @@
                                 </div>
 
                                 <button class="btn btn-outline-secondary" style="width: auto" onclick="getStates('<c:url
-                                        value="/${business.businessId}/updateDeliveryConfig?email=${business.email}"/>')">
+                                        value="/${business.businessId}/updateDeliveryConfig"/>')">
                                     Update Delivery Location
                                 </button>
 
@@ -526,10 +552,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (response, data) {
-                if (response  === "Success") {
+                if (response.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Pick up times updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Pick up times updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -538,7 +564,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Pick up times not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Pick up times not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -547,10 +573,10 @@
                 }
             },
             error: function (error) {
-                if (error  === "Success") {
+                if (error.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Pick up times updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Pick up times updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -559,7 +585,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Pick up times not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Pick up times not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -601,10 +627,10 @@
             dataType: 'json',
             success: function (response, data) {
                 console.log(response);
-                if (response  === "Success") {
+                if (response.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Delivery times updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Delivery times updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -613,7 +639,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Delivery times not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Delivery times not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -623,10 +649,10 @@
             },
             error: function (error) {
                 console.log(error);
-                if (error  === "Success") {
+                if (error.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Delivery times updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Delivery times updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -635,7 +661,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Delivery times not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Delivery times not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -658,10 +684,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (response, data) {
-                if (response  === "Success") {
+                if (response.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Paypal Secret updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Paypal Secret updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -670,7 +696,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Paypal Secret not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Paypal Secret not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -679,10 +705,10 @@
                 }
             },
             error: function (error) {
-                if (error  === "Success") {
+                if (error.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Paypal Secret updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Paypal Secret updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -691,7 +717,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Paypal Secret not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Paypal Secret not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -832,10 +858,10 @@
             type: "POST",
             contentType: "application/json",
             dataType: 'json',success: function (response, data) {
-                if (response  === "Success") {
+                if (response.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Order Preparation time updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -844,7 +870,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Order Preparation time not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -853,10 +879,10 @@
                 }
             },
             error: function (error) {
-                if (error  === "Success") {
+                if (error.responseText  === "Success") {
                     $('.alert-container').html(
                         `<div class="alert-container-success">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Order Preparation time updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -865,7 +891,7 @@
                 } else {
                     $('.alert-container').html(
                         `<div class="alert-container-error">
-    <h3 class="alert-text"><i class="fa fa-check"></i>Order Preparation time not updated</h3>
+    <p class="alert-text"><i class="fa fa-check"></i>&nbsp Order Preparation time not updated</p>
 </div>`
                     )
                     setTimeout(function () {
@@ -876,6 +902,7 @@
         });
     }
 </script>
+<script src="<c:url value="/resources/javascript/firebase.js"/>"></script>
 
 
 </body>

@@ -22,12 +22,12 @@ public class PurchaseOrders {
     String platfrom;
     String status;
     String customerNumber;
-    int total;
-    int deliveryCharge;
+    Double total;
+    Double deliveryCharge;
     public PurchaseOrders() {
     }
 
-    public PurchaseOrders(String purchaseId, String businessId, String customerEmail, List<CartProduct> products, Date orderedAt, Date orderReadyBy, String deliveryType, String notes, String deliveryAddress, String customerName, String platfrom, String status, String customerNumber, int total, int deliveryCharge) {
+    public PurchaseOrders(String purchaseId, String businessId, String customerEmail, List<CartProduct> products, Date orderedAt, Date orderReadyBy, String deliveryType, String notes, String deliveryAddress, String customerName, String platfrom, String status, String customerNumber, Double total, Double deliveryCharge) {
         this.purchaseId = purchaseId;
         this.businessId = businessId;
         this.customerEmail = customerEmail;
@@ -45,19 +45,19 @@ public class PurchaseOrders {
         this.deliveryCharge = deliveryCharge;
     }
 
-    public int getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
-    public int getDeliveryCharge() {
+    public Double getDeliveryCharge() {
         return deliveryCharge;
     }
 
-    public void setDeliveryCharge(int deliveryCharge) {
+    public void setDeliveryCharge(Double deliveryCharge) {
         this.deliveryCharge = deliveryCharge;
     }
 

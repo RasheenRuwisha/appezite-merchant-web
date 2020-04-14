@@ -27,17 +27,35 @@ public class AppConfigController {
     @Autowired
     BusinessApiClientImpl businessApiClient;
 
+    /**
+     * This functions renders the app configuration page
+     * @param businessId
+     * @return modelAndView
+     */
     @RequestMapping(value = "/{businessId}/appconfig", method = RequestMethod.GET)
-    public ModelAndView renderAppConfig(@PathVariable String businessId){
+    public ModelAndView renderAppConfig(ModelAndView modelAndView,@PathVariable String businessId, @RequestParam (required = false) String page){
         BusinessFullDetails businessFullDetails = businessApiClient.getBusinessDetails(businessId);
-        ModelAndView modelAndView = new ModelAndView("home");
+        if(page == null){
+            modelAndView.setViewName("home");
+        }else{
+            modelAndView.setViewName("manage-app");
+        }
         modelAndView.addObject("business", businessFullDetails);
         return modelAndView;
     }
 
 
+    /**
+     * This function sets the app configuration for the business and updates them, once the update is done the python script will be executed in a seperate thread
+     * @param modelAndView
+     * @param authentication
+     * @param businessId
+     * @param businessFullDetailsUpdate
+     * @param page
+     * @return
+     */
     @RequestMapping(value = "/{businessId}/appconfig", method = RequestMethod.POST)
-    public ModelAndView submitAppConfig(Authentication authentication, @PathVariable String businessId, @ModelAttribute BusinessFullDetails businessFullDetailsUpdate){
+    public ModelAndView submitAppConfig(ModelAndView modelAndView,Authentication authentication, @PathVariable String businessId, @ModelAttribute BusinessFullDetails businessFullDetailsUpdate, @RequestParam (required = false) String page){
         String email = UserDetailService.getUserId(authentication);
 
 
@@ -46,25 +64,50 @@ public class AppConfigController {
         businessFullDetails.setAppconfig(businessFullDetailsUpdate.getAppconfig());
         businessFullDetails.setAddress(businessFullDetailsUpdate.getAddress());
         businessFullDetails.setTheme(businessFullDetailsUpdate.getTheme());
-        List<OpenHours> pickUpHours = new ArrayList<>();
-        businessFullDetails.setDeliveryHours(pickUpHours);
-        businessFullDetails.setPickUpHours(pickUpHours);
+        if(page == null){
+            List<OpenHours> pickUpHours = new ArrayList<>();
+            businessFullDetails.setDeliveryHours(pickUpHours);
+            businessFullDetails.setPickUpHours(pickUpHours);
+        }
+
         try{
             businessApiClient.updateBusinessDetails(businessFullDetails,email);
-            ModelAndView modelAndView = new ModelAndView("redirect:/"+businessId+"/main");
+            if(page == null){
+                modelAndView.setViewName("redirect:/"+businessId+"/manageProducts");
+            }else{
+                modelAndView.setViewName("redirect:/"+businessId+"/appconfig?page=appconfig");
+            }
             modelAndView.addObject("business", businessFullDetails);
             Runnable r = new Runnable() {
                 public void run() {
-                    String[] cmd = {
-                            "python3",
-                            "/Users/rasheenruwisha/final-year-proj/build.py",
-                            businessFullDetails.getName(),
-                            businessFullDetails.getEmail(),
-                            businessFullDetails.getBusinessId(),
-                            businessFullDetails.getAppconfig().getStarterScreen(),
-                            businessFullDetails.getAppconfig().getLogo(),
-                            businessFullDetails.getTheme().getDark(),
-                    };
+                    String[] cmd;
+                    if(page == null){
+                        cmd = new String[]{
+                                "python3",
+                                "/Users/rasheenruwisha/final-year-proj/build.py",
+                                businessFullDetails.getName(),
+                                businessFullDetails.getEmail(),
+                                businessFullDetails.getBusinessId(),
+                                businessFullDetails.getAppconfig().getStarterScreen(),
+                                businessFullDetails.getAppconfig().getLogo(),
+                                businessFullDetails.getTheme().getDark(),
+                                businessFullDetails.getAppconfig().getIcon(),
+                        };
+                    }else{
+                        cmd = new String[]{
+                                "python3",
+                                "/Users/rasheenruwisha/final-year-proj/build.py",
+                                businessFullDetails.getName(),
+                                businessFullDetails.getEmail(),
+                                businessFullDetails.getBusinessId(),
+                                businessFullDetails.getAppconfig().getStarterScreen(),
+                                businessFullDetails.getAppconfig().getLogo(),
+                                businessFullDetails.getTheme().getDark(),
+                                businessFullDetails.getAppconfig().getIcon(),
+                                businessFullDetails.getAppId()
+                        };
+                    }
+
                     Process p = null;
                     try {
                         p = Runtime.getRuntime().exec(cmd);
@@ -88,7 +131,11 @@ public class AppConfigController {
 
             return modelAndView;
         }catch (Exception ex){
-            ModelAndView modelAndView = new ModelAndView("redirect:/"+businessId+"/main");
+            if(page == null){
+                modelAndView.setViewName("redirect:/"+businessId+"/manageProducts");
+            }else{
+                modelAndView.setViewName("redirect:/"+businessId+"/appconfig?page=appconfig");
+            }
             modelAndView.addObject("business", businessFullDetails);
             return modelAndView;
         }

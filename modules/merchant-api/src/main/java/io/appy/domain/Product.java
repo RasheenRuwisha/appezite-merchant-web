@@ -1,5 +1,6 @@
 package io.appy.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Product {
@@ -9,7 +10,7 @@ public class Product {
     List<String> categoryId;
     String image;
     Boolean visibility;
-    int price;
+    Double price;
     VariantGroup variant;
     List<AddonGroup> addons;
     String description;
@@ -19,7 +20,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productId, String name, List<String> categoryId, String image, Boolean visibility, int price, VariantGroup variant, List<AddonGroup> addons, String description, String businessId, String docType) {
+    public Product(String productId, String name, List<String> categoryId, String image, Boolean visibility, Double price, VariantGroup variant, List<AddonGroup> addons, String description, String businessId, String docType) {
         this.productId = productId;
         this.name = name;
         this.categoryId = categoryId;
@@ -73,11 +74,11 @@ public class Product {
         this.visibility = visibility;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

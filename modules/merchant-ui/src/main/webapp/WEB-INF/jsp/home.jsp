@@ -26,8 +26,24 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput-jquery.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
+
 </head>
 <body>
+
+<div class="batch-overlay" id="app-batch-overlay">
+    <div class="processing-container">
+        <i class="fa fa-spinner fa-spin fa-2x" style="color: white;"></i>
+        <span style="color: white">Updating App</span>
+    </div>
+</div>
 
 <div class="nav">
     <div class="nav-container">
@@ -176,7 +192,7 @@
 
                     <div class="form-button">
                         <button  type="submit"
-                                class="btn btn-outline-secondary"> <span id="submit-btn">Submit</span>  <i class="fal fa-chevron-right"></i>
+                                class="btn btn-outline-secondary" onclick='$("#app-batch-overlay").addClass("batch-overlay-visible")'> <span id="submit-btn">Submit</span>  <i class="fal fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
@@ -415,4 +431,6 @@
     })
 
 </script>
+<script src="<c:url value="/resources/javascript/firebase.js"/>"></script>
+
 </html>

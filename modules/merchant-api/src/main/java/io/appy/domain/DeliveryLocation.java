@@ -4,13 +4,13 @@ public class DeliveryLocation {
 
     String state;
     String city;
-    int price;
+    Double price;
     String deliveryTime;
 
     public DeliveryLocation() {
     }
 
-    public DeliveryLocation(String state, String city, int price, String deliveryTime) {
+    public DeliveryLocation(String state, String city, Double price, String deliveryTime) {
         this.state = state;
         this.city = city;
         this.price = price;
@@ -33,11 +33,11 @@ public class DeliveryLocation {
         this.city = city;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

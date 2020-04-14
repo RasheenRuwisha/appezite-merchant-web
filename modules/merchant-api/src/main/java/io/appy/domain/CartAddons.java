@@ -3,13 +3,13 @@ package io.appy.domain;
 public class CartAddons {
     String parent;
     String child;
-    int price;
+    Double price;
 
 
     public CartAddons() {
     }
 
-    public CartAddons(String parent, String child, int price) {
+    public CartAddons(String parent, String child, Double price) {
         this.parent = parent;
         this.child = child;
         this.price = price;
@@ -31,11 +31,11 @@ public class CartAddons {
         this.child = child;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

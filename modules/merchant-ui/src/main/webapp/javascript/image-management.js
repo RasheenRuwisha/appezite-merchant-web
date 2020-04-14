@@ -32,7 +32,7 @@ function updloadNewBusinessImage(input){
                     },
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",

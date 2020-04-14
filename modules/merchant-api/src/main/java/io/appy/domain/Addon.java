@@ -3,13 +3,13 @@ package io.appy.domain;
 public class Addon {
 
     String sku;
-    int price;
+    Double price;
     String name;
 
     public Addon() {
     }
 
-    public Addon(String sku, int price, String name) {
+    public Addon(String sku, Double price, String name) {
         this.sku = sku;
         this.price = price;
         this.name = name;
@@ -23,11 +23,11 @@ public class Addon {
         this.sku = sku;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

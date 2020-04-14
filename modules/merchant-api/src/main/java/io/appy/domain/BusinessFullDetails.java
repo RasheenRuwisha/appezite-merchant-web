@@ -24,11 +24,15 @@ public class BusinessFullDetails {
     List<DeliveryLocation> deliveryLocation;
     int orderPreparationTime;
     List<String> images;
-
+    String apkUrl;
+    List<String> notificationToken;
+    List<NotificationRequest> notifications;
+    List<String> businessNotification;
+    String appId;
     public BusinessFullDetails() {
     }
 
-    public BusinessFullDetails(String docType, String businessId, String country, String email, String name, Theme theme, Appconfig appconfig, Contact contact, String currency, String type, List<OpenHours> pickUpHours, List<OpenHours> deliveryHours, String description, Address address, String paypalSecret, Boolean deliveryEnabled, Boolean pickUpEnabled, List<DeliveryLocation> deliveryLocation, int orderPreparationTime, List<String> images) {
+    public BusinessFullDetails(String docType, String businessId, String country, String email, String name, Theme theme, Appconfig appconfig, Contact contact, String currency, String type, List<OpenHours> pickUpHours, List<OpenHours> deliveryHours, String description, Address address, String paypalSecret, Boolean deliveryEnabled, Boolean pickUpEnabled, List<DeliveryLocation> deliveryLocation, int orderPreparationTime, List<String> images, String apkUrl, List<String> notificationToken, List<NotificationRequest> notifications, List<String> businessNotification, String appId) {
         this.docType = docType;
         this.businessId = businessId;
         this.country = country;
@@ -49,6 +53,11 @@ public class BusinessFullDetails {
         this.deliveryLocation = deliveryLocation;
         this.orderPreparationTime = orderPreparationTime;
         this.images = images;
+        this.apkUrl = apkUrl;
+        this.notificationToken = notificationToken;
+        this.notifications = notifications;
+        this.businessNotification = businessNotification;
+        this.appId = appId;
     }
 
     public List<String> getImages() {
@@ -209,5 +218,45 @@ public class BusinessFullDetails {
 
     public void setPaypalSecret(String paypalSecret) {
         this.paypalSecret = paypalSecret;
+    }
+
+    public String getApkUrl() {
+        return apkUrl;
+    }
+
+    public void setApkUrl(String apkUrl) {
+        this.apkUrl = apkUrl;
+    }
+
+    public List<String> getNotificationToken() {
+        return notificationToken;
+    }
+
+    public void setNotificationToken(List<String> notificationToken) {
+        this.notificationToken = notificationToken;
+    }
+
+    public List<NotificationRequest> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<NotificationRequest> notifications) {
+        this.notifications = notifications;
+    }
+
+    public List<String> getBusinessNotification() {
+        return businessNotification;
+    }
+
+    public void setBusinessNotification(List<String> businessNotification) {
+        this.businessNotification = businessNotification;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }

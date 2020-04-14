@@ -9,10 +9,11 @@
 
         </div>
         <div class="form-container">
-            <form:form enctype="application/json" id="add-category-form" action='/merchant/${business.businessId}/addCategory?email=${business.email}' method="post">
+            <form:form enctype="application/json" id="add-category-form" action='/merchant/${business.businessId}/addCategory' method="post">
 
 
-            <div class="register-outer" style="border: none !important;">
+                <div class="modal-body">
+            <div  style="border: none !important;">
 
                 <div class="form-group">
                     <label for="prd-nam">Category Name</label>
@@ -35,10 +36,11 @@
                         Select a category image
                         </span>
                     </div>
+            </div>
 
-
-                    <div class="form-button">
-                        <button id="add-cat-submit" type="submit"   class="btn btn-outline-secondary">Add</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="add-cat-submit" type="submit"   class="btn btn-primary">Add</button>
                     </div>
 
                 </div>

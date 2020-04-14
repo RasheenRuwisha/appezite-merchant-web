@@ -16,7 +16,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if(loginAjaxRes.getPage().equals("appconfig")){
             httpServletResponse.sendRedirect("/merchant/"+loginAjaxRes.getBusinessId()+"/appconfig");
         }else{
-            httpServletResponse.sendRedirect("/merchant/"+loginAjaxRes.getBusinessId()+"/main");
+            httpServletResponse.sendRedirect("/merchant/"+loginAjaxRes.getBusinessId()+"/manageProducts");
         }
     }
 }

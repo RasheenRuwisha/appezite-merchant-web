@@ -9,7 +9,7 @@
 
         </div>
         <div class="form-container">
-            <form:form enctype="application/json" action='/merchant/${business.businessId}/updateCategory?email=${business.email}' method="post">
+            <form:form enctype="application/json" action='/merchant/${business.businessId}/updateCategory' method="post">
 
 
                 <div class="register-outer" style="border: none !important;">
@@ -43,8 +43,9 @@
 
 
 
-                    <div class="form-button">
-                        <button id="edit-cat-submit" type="submit"   class="btn btn-outline-secondary">Add</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="edit-cat-submit" type="submit"   class="btn btn-outline-secondary">Update</button>
                     </div>
 
                 </div>

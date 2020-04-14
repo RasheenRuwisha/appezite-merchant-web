@@ -6,6 +6,16 @@ html, body, input,select{
 }
 
 
+.login-a{
+    color: #1a73e8;
+    text-decoration: none;
+}
+.login-a:visited{
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+
 .nav{
     height: 50px;
     margin: 0;
@@ -28,7 +38,7 @@ html, body, input,select{
 
 .nav-user{
     margin-right: 20px;
-    margin-top: 16px;
+    margin-top: 11px;
     display: inline-block;
     float: right;
 }
@@ -264,7 +274,8 @@ html, body, input,select{
 
 .state-form{
     display: grid;
-    grid-template-columns: 40% 20% 15% 20% 5%;
+    grid-gap: 3rem;
+    grid-template-columns: 27% 20% 15% 20% 5%;
 }
 
 .add-btn{
@@ -315,21 +326,33 @@ a:active {
 }
 
 .alert-container-success{
-     height: 80px;
-     width: 100%;
-     background: #d4edda;
-     color: #155724;
-     position: absolute;
-     z-index: 100;
+    margin-left:10px;
+    height: 80px;
+    width: 250px;
+    bottom: 20px;
+    background: #d4edda;
+    color: #155724;
+    position: absolute;
+    z-index: 100;
+    line-height:55px;
+    text-align:center;
+    border-radius:10px;
+    box-shadow: 0 12px 25px 0 rgba(0, 0, 0, 0.2), 0 15px 32px 0 rgba(0, 0, 0, 0.19);
  }
 
 .alert-container-error{
+    margin-left:10px;
     height: 80px;
-    width: 100%;
-    background: #f8d7da;
-    color: #721c24;
+    width: 250px;
+    bottom: 20px;
     position: absolute;
     z-index: 100;
+    line-height:55px;
+    text-align:center;
+    border-radius:10px;
+    box-shadow: 0 12px 25px 0 rgba(0, 0, 0, 0.2), 0 15px 32px 0 rgba(0, 0, 0, 0.19);
+    background: #f8d7da;
+    color: #721c24;
 }
 
 .alert-text{
@@ -484,4 +507,30 @@ input:checked + .slider:before {
 .po-grand-totol-area  .footer-row .grand-total {
     color: #333;
     font-weight: bold;
+}
+
+
+.batch-overlay{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: none;
+    z-index: 999;
+    background: rgba(0,0,0,0.5);
+}
+
+.processing-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.batch-overlay-visible{
+    display: block; !important;
+}
+
+.notification-form{
+    border-radius: 10px;
+    box-shadow: 0 12px 25px 0 rgba(0, 0, 0, 0.2), 0 15px 32px 0 rgba(0, 0, 0, 0.19);
 }

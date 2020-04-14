@@ -2,12 +2,12 @@ package io.appy.domain;
 
 public class Variant {
     String name;
-    int price;
+    Double price;
 
     public Variant() {
     }
 
-    public Variant(String name, int price) {
+    public Variant(String name, Double price) {
         this.name = name;
         this.price = price;
     }
@@ -20,11 +20,11 @@ public class Variant {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

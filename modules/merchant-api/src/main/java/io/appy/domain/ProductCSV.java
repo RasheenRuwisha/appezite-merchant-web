@@ -3,14 +3,14 @@ package io.appy.domain;
 public class ProductCSV {
 
     String name;
-    int price;
+    Double price;
     String description;
     String image;
 
     public ProductCSV() {
     }
 
-    public ProductCSV(String name, int price, String description, String image) {
+    public ProductCSV(String name, Double price, String description, String image) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -25,11 +25,11 @@ public class ProductCSV {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

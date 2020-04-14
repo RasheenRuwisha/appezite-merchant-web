@@ -25,26 +25,6 @@
         </property>
     </bean>
 
-    <!--<bean class="hms.apptizer.admin.util.LogHelper" id="logHelper" init-method="init" destroy-method="exit"/>-->
-
-    <!--<bean class="hms.apptizer.admin.util.UserDetailsHelper" id="userDetailsHelper"/>-->
-
-    <!--<bean class="hms.apptizer.admin.client.api.impl.BusinessApiClientImpl" id="businessApiClient">-->
-        <!--<constructor-arg index="0" value="${io.apptizer.consumer.api.base.url}"/>-->
-    <!--</bean>-->
-
-    <!--<bean class="io.apptizer.iso.client.impl.ISOServerApiClientImpl" id="isoServerApiClient">-->
-        <!--<constructor-arg index="0" value="${iso.apptizer.api.base.url}"/>-->
-    <!--</bean>-->
-
-    <!--<bean class="io.apptizer.clover.client.impl.CloverApiClientImpl" id="cloverApiClient">-->
-        <!--<constructor-arg index="0" value="${clover.api.base.url}"/>-->
-    <!--</bean>-->
-
-    <!--<bean class="io.apptizer.registration.client.impl.CommonRegistrationApiClientImpl" id="registrationServerApiClient">-->
-        <!--<constructor-arg index="0" value="${registration.apptizer.api.base.url}"/>-->
-    <!--</bean>-->
-
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basenames="classpath:application"
@@ -62,7 +42,7 @@
     </bean>
 
     <bean class="io.appy.api.impl.BusinessApiClientImpl" id="businessApiClient">
-        <constructor-arg index="0" value="http://localhost:8081/"/>
+        <constructor-arg index="0" value="http://localhost:5005/merchant/"/>
     </bean>
 
     <mvc:annotation-driven/>
@@ -72,6 +52,22 @@
     <mvc:resources mapping="/resources/images/**" location="/img/"/>
     <mvc:resources mapping="/resources/fonts/**" location="/fonts/"/>
 
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="io.appy.error.NotFoundException">
+                    error/404
+                </prop>
+                <prop key="io.appy.error.HttpUnauthorizedException">
+                    error/401
+                </prop>
+                <prop key="java.lang.Exception">
+                    error/500
+                </prop>
+            </props>
+        </property>
+    </bean>
 
 
 </beans>

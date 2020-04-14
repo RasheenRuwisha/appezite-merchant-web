@@ -86,7 +86,7 @@ function updateProductImage(input){
                     },
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -162,7 +162,7 @@ function editProductImage(input,id,overlay){
                     },
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -667,8 +667,6 @@ function createNewAddonGroup(){
 
 
 function createNewAddonItem(id,item){
-    alert(id)
-    alert(item)
     count = 0;
     for(var i =0;i<addonitemcount.length;i++){
         if(addonitemcount[i].name === item){
@@ -680,11 +678,11 @@ function createNewAddonItem(id,item){
             `<div class="addon-items " id="addon-group-items${count}${item}">
 
       <div class="form-group">
-                                            <input class="form-control" type="text" name="addon-group-${item}-item-${count}-name" id="addon-group-1-item-1-name">
+                                            <input class="form-control" type="text" name="addon-group-${item}-item-${count}-name" id="addon-group-${item}-item-${count}-name">
                                         </div>
 
                                         <div class="form-group">
-                                            <input class="form-control" type="text" name="addon-group-${item}-item-${count}-price" id="addon-group-1-item-1-price">
+                                            <input class="form-control" type="text" name="addon-group-${item}-item-${count}-price" id="addon-group-${item}-item-${count}-price">
                                         </div>
                                
                                  <i style="color:#d93025" class="fas fa-trash-alt addon-delete" onclick="removeAddonFroup('#addon-group-items${count}${item}')"></i>
@@ -799,12 +797,15 @@ function initProductRemoveModal(categoryName, url){
 
 function submitCsvForm(){
     $("#csv-upload").submit()
+    $("#product-batch-overlay").addClass('batch-overlay-visible')
 }
 
 function submitCsvForm2(){
     $("#csv-upload-2").submit()
+    $("#product-batch-overlay").addClass('batch-overlay-visible')
 }
 
 function submitJsonForm(){
     $("#json-upload").submit()
+    $("#product-batch-overlay").addClass('batch-overlay-visible')
 }

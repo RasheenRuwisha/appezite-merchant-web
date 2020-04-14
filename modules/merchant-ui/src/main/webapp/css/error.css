@@ -1,0 +1,69 @@
+
+/* App Error Page */
+.error-page {
+    width: inherit;
+    top: 40%;
+    left: 50%;
+    text-align: center;
+    position: absolute;
+    transform: translate(-50%,-40%);
+}
+
+.error-page .btn {
+    margin-top: 20px;
+}
+
+
+.content-empty {
+    padding: 40px;
+}
+
+.content-empty .fa {
+    color: rgb(138, 138, 138);
+}
+
+.content-empty h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+.content-empty h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+.grey-bg {
+    background: #F1F1F1;
+}
+
+
+.btn-4 {
+    border: 3px solid #2ECC71;
+    color: #2ECC71;
+}
+
+.btn-4:active {
+    border-color: #2ECC71;
+    color: #FFFFFF;
+}
+
+.btn-4:hover {
+    background: #2ECC71;
+    color: #ffffff;
+}
+
+.btn-4:active:before {
+    color: #2ECC71;
+}
+
+.btn-filled-md.primary,
+.btn-filled-sm.primary {
+    background: #2ECC71;
+    color: #ffffff;
+}
+
+.btn-filled-sm.primary:hover,
+.btn-filled-md.primary:hover {
+    background: #26a65c;
+    border-color: #26a65c;
+}

@@ -28,3 +28,7 @@
     margin: 0px auto;
     display: none;
 }
+
+.modal-dialog {
+    margin: 2.75rem 26.75rem !important;
+}

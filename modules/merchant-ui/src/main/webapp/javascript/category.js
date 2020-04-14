@@ -25,7 +25,7 @@ function updateCategoryImage(input){
                     var settings = {
                         "async": true,
                         "crossDomain": true,
-                        "url": "http://localhost:5005/upload",
+                        "url": "http://localhost:5005/ipfs/upload",
                         "method": "POST",
                         "headers": {
                             "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -82,7 +82,7 @@ function editCategoryImage(input){
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:5005/upload",
+                    "url": "http://localhost:5005/ipfs/upload",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Client-ID f1cbaf75fd23eec",
@@ -152,7 +152,6 @@ function reloadpaage() {
     }, 3000);
 }
 
-
 function removeCategory(url) {
     $.ajax({
         url: url,
@@ -161,7 +160,6 @@ function removeCategory(url) {
     });
 
 }
-
 
 function addProductCategory(){
     if($("#cat-id :selected").text() == ""){
@@ -172,7 +170,6 @@ function addProductCategory(){
         $("#prd-category").val($("#cat-id :selected").text())
     }
 }
-
 
 function removeProductCategory(category,val,th){
     $('#cat-id')
@@ -190,7 +187,6 @@ function addEditProductCategory(productId){
         $("#"+productId+"-prd-category").val($("#"+productId+"-cat-id :selected").text())
     }
 }
-
 
 function removeEditProductCategory(productId,category,val,th){
     $('#'+productId+"-cat-id")
@@ -211,13 +207,11 @@ function initCategoryModal(name, url,categoryId){
     $("#edit-category-modal").modal('toggle');
 }
 
-
 function initCategoryRemoveModal(categoryName, url){
     $("#remove-category-name").text(categoryName);
     $("#remove-category-form").attr('action', url);
     $("#remove-category-modal").modal('toggle');
 }
-
 
 function validateCatName(){
     let email = $("#cat-name").val().trim();
@@ -232,9 +226,6 @@ function validateCatName(){
     return false;
 }
 
-
-
-
 function validateCatImage(){
     let email = $("#cat-url").val().trim();
     if(email === ""){
@@ -245,7 +236,6 @@ function validateCatImage(){
     }
     return false;
 }
-
 
 function validateCatFields(){
     let validData = false;
